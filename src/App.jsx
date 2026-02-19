@@ -170,7 +170,7 @@ const App = () => {
             <div className="flex flex-col space-y-2 text-sm text-gray-300 font-light">
               <button onClick={() => handlePageChange('services')} className="hover:text-white text-left transition-colors">Services</button>
               <button onClick={() => handlePageChange('why-cedar')} className="hover:text-white text-left transition-colors">Why Cedar</button>
-              <button onClick={() => handlePageChange('contact')} className="hover:text-white text-left transition-colors font-bold">Contact</button>
+              <button onClick={() => handlePageChange('contact')} className="hover:text-white text-left transition-colors font-bold">Request Capacity</button>
               <button onClick={() => handlePageChange('engineers')} className="hover:text-white text-left transition-colors">Join Cedar</button>
             </div>
           </div>
