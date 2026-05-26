@@ -75,15 +75,32 @@ const Logo = ({ isFooter = false, isMobileNav = false }) => {
 const App = () => {
   const [currentPage, setCurrentPage] = useState(() => {
     const hash = window.location.hash.replace('#', '');
-    const validPages = ['home', 'services', 'why-cedar', 'engineers', 'contact', 'email-policy'];
+    const validPages = ['home', 'services', 'why-cedar', 'engineers', 'contact', 'email-policy', 'partners'];
     return validPages.includes(hash) ? hash : 'home';
   });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const pageTitles = { home: 'Home', services: 'Services', 'why-cedar': 'Why Cedar', engineers: 'Join Cedar', contact: 'Contact', 'email-policy': 'Email Policy' };
+  const pageTitles = { home: 'Home', services: 'Services', 'why-cedar': 'Why Cedar', engineers: 'Join Cedar', contact: 'Contact', 'email-policy': 'Email Policy', partners: 'Channel Partner Brief' };
 
   useEffect(() => {
     document.title = `${pageTitles[currentPage] || 'Home'} - Cedar Infrastructure Group`;
+  }, [currentPage]);
+
+  useEffect(() => {
+    const META_ID = 'cedar-robots-noindex';
+    const unlisted = currentPage === 'partners';
+    let tag = document.getElementById(META_ID);
+    if (unlisted) {
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.id = META_ID;
+        tag.name = 'robots';
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute('content', 'noindex, nofollow');
+    } else if (tag) {
+      tag.remove();
+    }
   }, [currentPage]);
 
   const NavLink = ({ id, label }) => (
@@ -180,6 +197,7 @@ const App = () => {
         {currentPage === 'engineers' && <EngineersPage setPage={handlePageChange} />}
         {currentPage === 'contact' && <ContactPage />}
         {currentPage === 'email-policy' && <EmailPolicyPage />}
+        {currentPage === 'partners' && <PartnersPage />}
       </main>
 
       {/* Footer */}
@@ -1446,5 +1464,456 @@ const EmailPolicyPage = () => (
     </section>
   </div>
 );
+
+const PartnersPage = () => (
+  <div style={{ backgroundColor: COLORS.neutralBg }}>
+    {/* CONFIDENTIAL BANNER */}
+    <div className="w-full text-white text-center py-2.5 px-4 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.4em]" style={{ backgroundColor: '#7F1D1D' }} role="alert">
+      <ShieldAlert size={14} className="inline -mt-0.5 mr-2" aria-hidden="true" />
+      Confidential — Internal Reference. Not for distribution to clients or prospects.
+    </div>
+
+    {/* HERO */}
+    <section className="py-16 md:py-24 px-4 md:px-6 border-b border-gray-100">
+      <div className="max-w-4xl mx-auto">
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 border" style={{ borderColor: '#7F1D1D', backgroundColor: '#7F1D1D10' }}>
+          <ShieldAlert size={12} aria-hidden="true" style={{ color: '#7F1D1D' }} />
+          <span className="text-[10px] font-bold uppercase tracking-[0.3em]" style={{ color: '#7F1D1D' }}>Confidential</span>
+        </div>
+        <span className="text-[10px] font-bold uppercase tracking-[0.4em] block mb-4" style={{ color: COLORS.bronzeOnLight }}>
+          Internal Reference
+        </span>
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4 leading-[1.05]" style={{ color: COLORS.cedarGreen }}>
+          Channel Partner Brief
+        </h1>
+        <div className="h-[2px] w-16 mb-6" style={{ backgroundColor: COLORS.bronzeAccent }} aria-hidden="true" />
+        <p className="text-base md:text-lg font-light leading-relaxed" style={{ color: COLORS.slateGray }}>
+          For strategic relationships originating Cedar opportunities. Use this brief to recognize a Cedar deal in conversation, size it in your head, and hand it off cleanly. Do not forward to clients, prospects, or anyone outside the named channel relationship.
+        </p>
+      </div>
+    </section>
+
+    {/* WHAT CEDAR SELLS */}
+    <section className="py-16 md:py-20 px-4 md:px-6 bg-white border-b border-gray-100">
+      <div className="max-w-4xl mx-auto">
+        <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-6 uppercase" style={{ color: COLORS.cedarGreen }}>What Cedar Sells, in Plain English</h2>
+        <div className="space-y-5 text-[15px] leading-relaxed font-light" style={{ color: COLORS.slateGray }}>
+          <p>
+            Cedar is an IT consulting services firm. We are working on relationships with vendors to start selling HPE Aruba, Palo Alto, and Fortinet to become a Value-Added Reseller (VAR). Companies hire us when they need senior technical people to do infrastructure work that their own internal IT team cannot do alone, either because they are too busy, do not have the right skills, are facing a deadline they cannot miss, or want to reset staffing needs after M&A.
+          </p>
+          <p>The kind of work Cedar does is the plumbing of corporate IT. Things like:</p>
+          <ul className="list-disc pl-6 space-y-2">
+            <li>Setting up the network so all the office locations can talk to each other</li>
+            <li>Building cloud environments (Microsoft Azure, Amazon AWS) so the business can run software without owning servers</li>
+            <li>Replacing old servers with new ones and moving the data over without breaking anything</li>
+            <li>Securing the network against hackers (firewalls, segmentation, identity controls)</li>
+            <li>Sending people to physical office or data center locations to install or replace equipment</li>
+            <li>Combining and/or replacing the IT systems of two companies after a merger or acquisition</li>
+          </ul>
+          <p>
+            We do not do help desk, password resets, or printer support. We are not the people you call when your laptop breaks. We are the people you call when you have a deadline to migrate hundreds or thousands of servers or network switches and your internal team cannot get it done.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* THE THREE THINGS */}
+    <section className="py-16 md:py-20 px-4 md:px-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="max-w-4xl mb-12">
+          <span className="text-[10px] font-bold uppercase tracking-[0.4em] block mb-3" style={{ color: COLORS.bronzeOnLight }}>The Three Products</span>
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>The Three Things Cedar Sells</h2>
+          <p className="mt-4 text-[15px] leading-relaxed font-light" style={{ color: COLORS.slateGray }}>
+            These are the three "products" Cedar offers. Knowing the difference helps you spot the right kind of deal.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <PartnerProduct
+            n="01"
+            title="Staff Augmentation"
+            tagline="Renting one of our specialists to work alongside the client's internal team for the length of an engagement."
+            body={[
+              'The client tells us what skills they need (for example, a senior network engineer with Cisco and Palo Alto firewall experience). We provide a vetted specialist who shows up, embeds with their team, and works on whatever they need. The client pays an hourly rate. They get the skills they need without having to hire a full-time employee and without their internal HR team needing to vet someone with these skill sets.',
+              'Engagements can run anywhere from a few months to multi-year for clients with sustained demand (private equity portfolios, large healthcare or manufacturing groups, federal subcontracts).'
+            ]}
+            cue={'"We need help, we just do not have the bench for this." "Our senior engineer just left and we have a project mid-flight." "We need to staff up for the next six months."'}
+          />
+          <PartnerProduct
+            n="02"
+            title="Project Implementation"
+            tagline="Cedar owns the outcome and the deadline, not just the bodies."
+            body={[
+              'The client gives us a defined goal (for example, migrate 250 retail sites to a new network). We scope it, price it, staff it, run it, and deliver it. The client buys the outcome. They do not have to manage the people doing the work, just the relationship with us.'
+            ]}
+            cue={'"We need this done by Q3." "We are doing a network refresh across all our sites." "We need someone to run this migration end to end."'}
+          />
+          <PartnerProduct
+            n="03"
+            title="Advisory"
+            tagline="Senior technical leadership delivered on a retainer or hourly basis."
+            body={[
+              'For companies that need an experienced IT executive or architect at the table but do not need (or cannot afford) a full-time hire. Comes in two flavors:'
+            ]}
+            sub={[
+              { label: 'Fractional CIO', text: 'A part-time senior IT executive who owns IT strategy, vendor decisions, budget posture, and executive technical communication. Common for small and mid-market companies, and for private equity portfolio companies during the integration phase after an acquisition.' },
+              { label: 'Infrastructure Architect Advisory', text: 'A senior architect engaged to validate technical decisions, review vendor proposals, design target-state environments, or backstop an internal team on a complex program.' }
+            ]}
+            cue={'"We do not have a CIO and we are out of our depth." "We need someone senior to validate what our vendor is telling us." "We just acquired a company and need leadership cover during integration." "Our internal team is good but we need someone with more scars on a transformation this size."'}
+          />
+        </div>
+      </div>
+    </section>
+
+    {/* RATE CARD */}
+    <section className="py-16 md:py-20 px-4 md:px-6 bg-white border-y border-gray-100">
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-10">
+          <span className="text-[10px] font-bold uppercase tracking-[0.4em] block mb-3" style={{ color: COLORS.bronzeOnLight }}>Pricing</span>
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>Cedar's Rate Card</h2>
+          <p className="mt-4 text-[15px] leading-relaxed font-light max-w-3xl" style={{ color: COLORS.slateGray }}>
+            These are the hourly rates Cedar charges the client. Cedar covers payroll, insurance, replacement protection, and project oversight. The client pays one invoice.
+          </p>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-[14px]" style={{ color: COLORS.slateGray }}>
+            <thead>
+              <tr className="border-b-2" style={{ borderColor: COLORS.cedarGreen }}>
+                <th className="py-3 pr-4 text-[10px] font-bold uppercase tracking-[0.3em]" style={{ color: COLORS.cedarGreen }}>Role</th>
+                <th className="py-3 px-4 text-[10px] font-bold uppercase tracking-[0.3em]" style={{ color: COLORS.cedarGreen }}>What They Do</th>
+                <th className="py-3 pl-4 text-[10px] font-bold uppercase tracking-[0.3em] whitespace-nowrap" style={{ color: COLORS.cedarGreen }}>Bill Rate</th>
+              </tr>
+            </thead>
+            <tbody className="font-light">
+              <RateRow role="Field Services Technician (FST)" what="Goes on-site to install, replace, or troubleshoot physical equipment. The 'hands and feet' of any project. Often called 'Smart Hands.'" rate="$60 to $75 / hour" />
+              <RateRow role="Lead Field Services Technician (Lead FST)" what="Same as above but runs the on-site crew and reports back to project leadership. On-site work is always sold with a Lead FST and FSTs added as needed depending on volume and scope." rate="$75 to $95 / hour" />
+              <RateRow role="Implementation Engineer" what="Mid-level technical specialist who configures network equipment, builds servers, sets up cloud environments. Most 'doing the work' hours come from this role." rate="$95 to $150 / hour" />
+              <RateRow role="Senior Engineer / Architect" what="Senior specialist who designs the solution and owns the technical decisions. Smaller engagements where someone has to both design and build." rate="$135 to $200 / hour" />
+              <RateRow role="Technical Project Manager" what="Runs the schedule, the budget, and the customer status updates. Keeps the engagement on track." rate="$75 to $135 / hour" />
+              <RateRow role="Fractional CIO / IT Leadership Advisor" what="Part-time senior IT executive for small and mid-market companies that cannot afford a full-time CIO." rate="$7,500 to $15,000 / month retainer" />
+            </tbody>
+          </table>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+          <div className="bg-[#F2F2F0] border border-gray-200 p-6 rounded-sm">
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] mb-3" style={{ color: COLORS.bronzeOnLight }}>Travel and On-Site Work</h4>
+            <p className="text-[14px] font-light leading-relaxed" style={{ color: COLORS.slateGray }}>
+              Cedar can deploy people anywhere in the continental United States. When travel is required, Cedar bills the client for reasonable expenses (flights, lodging, rental car or ride share) plus $50 per diem for overnight stays. Pricing varies depending on the metro and duration of stay, but typically $1,800 to $3,000 pass-through cost per technician.
+            </p>
+          </div>
+          <div className="border-l-4 bg-white p-6 rounded-sm shadow-sm" style={{ borderColor: COLORS.bronzeAccent }}>
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] mb-3" style={{ color: COLORS.cedarGreen }}>One Important Rule</h4>
+            <p className="text-[14px] font-light leading-relaxed" style={{ color: COLORS.slateGray }}>
+              Cedar does not do one-off dispatch. Every engagement has a minimum of about 300 hours of work, which usually translates to a few months of part-time engagement or one to two months of full-time. If a prospect says "I just need someone for a day," that is not a Cedar deal. Pass.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* DEAL SIZING */}
+    <section className="py-16 md:py-20 px-4 md:px-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-10">
+          <span className="text-[10px] font-bold uppercase tracking-[0.4em] block mb-3" style={{ color: COLORS.bronzeOnLight }}>Deal Sizing</span>
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>What a Cedar Deal Typically Looks Like in Dollars</h2>
+          <p className="mt-4 text-[15px] leading-relaxed font-light max-w-3xl" style={{ color: COLORS.slateGray }}>
+            Use these to size up an opportunity in your head when you are talking to a prospect. The commission column reflects the rate that applies to that deal type: 6 percent on staff augmentation and advisory retainers, 5 percent on project implementation and one-off advisory engagements.
+          </p>
+        </div>
+
+        <div className="overflow-x-auto bg-white border border-gray-100 shadow-sm rounded-sm">
+          <table className="w-full text-left text-[14px]" style={{ color: COLORS.slateGray }}>
+            <thead>
+              <tr className="border-b-2" style={{ borderColor: COLORS.cedarGreen }}>
+                <th className="py-3 px-4 text-[10px] font-bold uppercase tracking-[0.3em]" style={{ color: COLORS.cedarGreen }}>Deal Type</th>
+                <th className="py-3 px-4 text-[10px] font-bold uppercase tracking-[0.3em] whitespace-nowrap" style={{ color: COLORS.cedarGreen }}>Typical Contract Value</th>
+                <th className="py-3 px-4 text-[10px] font-bold uppercase tracking-[0.3em] whitespace-nowrap" style={{ color: COLORS.cedarGreen }}>Your Commission</th>
+              </tr>
+            </thead>
+            <tbody className="font-light">
+              <DealRow deal="One specialist on staff augmentation, six months" tcv="$80,000 to $150,000" comm="$4,800 to $9,000 (6%)" />
+              <DealRow deal="One specialist on staff augmentation, twelve months" tcv="$150,000 to $300,000" comm="$9,000 to $18,000 (6%)" />
+              <DealRow deal="Multi-specialist staff augmentation, long-term (PE portfolio, large M&A)" tcv="$1,500,000 to $5,000,000+" comm="$90,000 to $300,000+ (6%)" />
+              <DealRow deal="Project implementation, multi-resource, three to six months" tcv="$250,000 to $750,000" comm="$12,500 to $37,500 (5%)" />
+              <DealRow deal="Project implementation, larger program, six to twelve months" tcv="$750,000 to $2,000,000" comm="$37,500 to $100,000 (5%)" />
+              <DealRow deal="Advisory: Fractional CIO retainer" tcv="$90,000 to $120,000 base" comm="$5,400 to $7,200 (6%) plus pull-through" />
+              <DealRow deal="Advisory: Infrastructure Architect engagement" tcv="$50,000 to $200,000 per engagement" comm="$2,500 to $10,000 (5%)" />
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    {/* TARGET CLIENT PROFILE */}
+    <section className="py-16 md:py-20 px-4 md:px-6 bg-white border-y border-gray-100">
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-10">
+          <span className="text-[10px] font-bold uppercase tracking-[0.4em] block mb-3" style={{ color: COLORS.bronzeOnLight }}>Who To Look For</span>
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>Target Client Profile</h2>
+          <p className="mt-4 text-[15px] leading-relaxed font-light max-w-3xl" style={{ color: COLORS.slateGray }}>
+            These are the kinds of companies that hire Cedar. When you are in a room and someone fits this picture, that is a Cedar conversation.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="bg-white border-l-4 border-[#065F46] p-6 md:p-8 shadow-sm rounded-sm">
+            <h3 className="text-sm font-bold mb-6 uppercase tracking-widest text-[#065F46]">The Best Prospects</h3>
+            <div className="space-y-5">
+              <ProfileItem title="Private equity firms and their portfolio companies" desc="Especially right after an acquisition. PE has a 100-day plan and needs the IT integration done fast. Cedar runs this play all day. This is the strongest lane." />
+              <ProfileItem title="Mid-sized companies (500 to 10,000 employees) doing big IT projects" desc="Cloud migrations, network replacements, new locations, post-merger IT system integrations. Their internal team is good but stretched." />
+              <ProfileItem title="CIOs and IT Directors with a transformation budget" desc="They have money to spend, a board that wants results, and a small team. They need experienced hands to deliver." />
+              <ProfileItem title="Other IT firms (VARs and MSPs) that are over capacity" desc="Examples: CDW, SHI, Trace3, Insight, Presidio, World Wide Technology. They win a deal they cannot deliver fast enough alone. Cedar fills in." />
+            </div>
+          </div>
+
+          <div className="bg-white border-l-4 border-[#A38A6A] p-6 md:p-8 shadow-sm rounded-sm">
+            <h3 className="text-sm font-bold mb-6 uppercase tracking-widest" style={{ color: COLORS.bronzeOnLight }}>Possible But Slower</h3>
+            <div className="space-y-5">
+              <ProfileItem title="Federal contractors and defense work" desc="Cedar is SAM.gov registered and CAGE coded for federal work and is already active in this space. If a prospect happens to be a federal prime or sub, bring it to Christian. Federal sales cycles are six to eighteen months." />
+              <ProfileItem title="Small businesses without a defined IT budget cycle" desc="Worth pursuing only if there is a Fractional CIO opportunity. Otherwise the deal is too small and the sales cycle is too long." />
+            </div>
+          </div>
+
+          <div className="bg-white border-l-4 border-[#991B1B] p-6 md:p-8 shadow-sm rounded-sm">
+            <h3 className="text-sm font-bold mb-6 uppercase tracking-widest text-[#991B1B]">Not A Fit (Pass)</h3>
+            <ul className="space-y-3 text-[14px] font-light" style={{ color: COLORS.slateGray }}>
+              <PassItem text="Anyone asking for help desk, deskside support, or break-fix work" />
+              <PassItem text="Anyone asking for a single day of work or a one-time service call" />
+              <PassItem text="Price shoppers looking for the cheapest body they can find" />
+              <PassItem text="Deals under $50,000 total contract value" />
+              <PassItem text="Anyone whose only contact is procurement (no decision-maker access)" />
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* RECOGNITION CUES */}
+    <section className="py-16 md:py-20 px-4 md:px-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-10 max-w-3xl">
+          <span className="text-[10px] font-bold uppercase tracking-[0.4em] block mb-3" style={{ color: COLORS.bronzeOnLight }}>Listen For These</span>
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>How to Recognize a Cedar Deal in Conversation</h2>
+          <p className="mt-4 text-[15px] leading-relaxed font-light" style={{ color: COLORS.slateGray }}>
+            When you hear these phrases from a prospect, you have a live one.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Quote text="We are short staffed." />
+          <Quote text="We just acquired a company and the IT integration is a mess." />
+          <Quote text="We have a hard deadline and we are behind." />
+          <Quote text="Our internal team cannot handle this on top of their day jobs." />
+          <Quote text="We do not have the right skills in-house for this." />
+          <Quote text="We are doing a data center exit, cloud migration, or network refresh." />
+          <Quote text="Our current vendor is not delivering." />
+          <Quote text="We need senior people, not junior consultants." />
+          <Quote text="We are running a transformation program and need outside help." />
+        </div>
+      </div>
+    </section>
+
+    {/* M&A PITCH */}
+    <section className="py-16 md:py-20 px-4 md:px-6 text-white" style={{ backgroundColor: COLORS.cedarGreen }}>
+      <div className="max-w-4xl mx-auto">
+        <span className="text-[10px] font-bold uppercase tracking-[0.4em] block mb-3" style={{ color: COLORS.bronzeDark }}>The M&A Room Pitch</span>
+        <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase mb-8">How to Pitch Cedar in an M&A Room</h2>
+        <p className="text-[15px] font-light leading-relaxed mb-8 text-gray-300">
+          When you are sitting with PE partners or deal teams who just acquired a company:
+        </p>
+        <blockquote className="border-l-4 pl-6 py-2 text-lg md:text-xl font-extralight italic leading-relaxed" style={{ borderColor: COLORS.bronzeAccent }}>
+          You just bought a company with no real IT bench. Their setup is held together by an outside firm that does not know the environment, and your integration deadline is six months. Cedar drops in a vetted technical lead plus a small team of specialists. They scope the actual work, they run the integration, and you get one accountable point of contact. No full-time hires you have to lay off later. Same playbook works on carve-outs.
+        </blockquote>
+        <p className="text-[14px] font-light leading-relaxed mt-8 text-gray-300">
+          That is the entire pitch. Decision-makers in M&A rooms already know they have this problem. They just have not heard a clean solution articulated.
+        </p>
+      </div>
+    </section>
+
+    {/* HOW YOU GET PAID */}
+    <section className="py-16 md:py-20 px-4 md:px-6 bg-white">
+      <div className="max-w-5xl mx-auto">
+        <div className="mb-10">
+          <span className="text-[10px] font-bold uppercase tracking-[0.4em] block mb-3" style={{ color: COLORS.bronzeOnLight }}>Commission Structure</span>
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>How You Get Paid</h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+          <div className="bg-[#F2F2F0] border border-gray-200 p-6 rounded-sm">
+            <p className="text-3xl font-bold mb-2" style={{ color: COLORS.cedarGreen }}>6%</p>
+            <p className="text-[13px] font-light leading-relaxed" style={{ color: COLORS.slateGray }}>
+              of monthly collected billing on <strong className="font-semibold">staff augmentation</strong> engagements and <strong className="font-semibold">advisory retainers</strong> (Fractional CIO).
+            </p>
+          </div>
+          <div className="bg-[#F2F2F0] border border-gray-200 p-6 rounded-sm">
+            <p className="text-3xl font-bold mb-2" style={{ color: COLORS.cedarGreen }}>5%</p>
+            <p className="text-[13px] font-light leading-relaxed" style={{ color: COLORS.slateGray }}>
+              of collected billing on <strong className="font-semibold">project implementation</strong> engagements and <strong className="font-semibold">one-off advisory engagements</strong> (Infrastructure Architect).
+            </p>
+          </div>
+        </div>
+
+        <div className="space-y-6 text-[15px] leading-relaxed font-light mb-10" style={{ color: COLORS.slateGray }}>
+          <div>
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] block mb-1" style={{ color: COLORS.cedarGreen }}>Trigger</span>
+            <p>Two things must happen before any commission accrues. First, the client signs a contract with Cedar. Second, the client pays Cedar's first invoice. Once both are true, your commission begins.</p>
+          </div>
+          <div>
+            <span className="text-[10px] font-bold uppercase tracking-[0.3em] block mb-1" style={{ color: COLORS.cedarGreen }}>Duration</span>
+            <p>The life of that signed engagement.</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+          <div className="bg-white border-l-4 p-6 shadow-sm rounded-sm" style={{ borderColor: COLORS.bronzeAccent }}>
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] mb-3" style={{ color: COLORS.cedarGreen }}>Example: Staff Augmentation (6%)</h4>
+            <p className="text-[14px] font-light leading-relaxed" style={{ color: COLORS.slateGray }}>
+              You introduce Cedar to a PE-backed company. Cedar signs a contract to provide one network engineer at $130 per hour for twelve months, billed at 160 hours per month. Monthly billing is $20,800. Your monthly commission at 6 percent is <strong className="font-semibold" style={{ color: COLORS.cedarGreen }}>$1,248</strong>. Over the twelve-month engagement, you earn <strong className="font-semibold" style={{ color: COLORS.cedarGreen }}>$14,976</strong> on that one placement. If the engagement extends another year, you continue earning $1,248 per month for the duration.
+            </p>
+          </div>
+          <div className="bg-white border-l-4 p-6 shadow-sm rounded-sm" style={{ borderColor: COLORS.bronzeAccent }}>
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] mb-3" style={{ color: COLORS.cedarGreen }}>Example: Project Implementation (5%)</h4>
+            <p className="text-[14px] font-light leading-relaxed" style={{ color: COLORS.slateGray }}>
+              You introduce Cedar to a mid-market company doing a network refresh. Cedar signs a $600,000 fixed-scope project that bills out in milestones over five months. At 5 percent of collected billing, you earn <strong className="font-semibold" style={{ color: COLORS.cedarGreen }}>$30,000</strong> across the life of the project, paid monthly as Cedar invoices and collects.
+            </p>
+          </div>
+        </div>
+
+        <p className="text-[14px] font-light italic" style={{ color: COLORS.slateGray }}>
+          Multiple placements stack. There is no cap on how many engagements you can originate.
+        </p>
+      </div>
+    </section>
+
+    {/* HOW TO HAND OFF */}
+    <section className="py-16 md:py-20 px-4 md:px-6 border-y border-gray-100">
+      <div className="max-w-5xl mx-auto">
+        <div className="mb-10">
+          <span className="text-[10px] font-bold uppercase tracking-[0.4em] block mb-3" style={{ color: COLORS.bronzeOnLight }}>The Handoff</span>
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>How to Hand a Deal to Cedar</h2>
+        </div>
+
+        <ol className="space-y-6">
+          <HandoffStep n="01" text="Confirm the prospect fits the profile above." />
+          <HandoffStep n="02" text="Make sure the prospect actually has decision-maker authority or access to it." />
+          <HandoffStep
+            n="03"
+            text={(
+              <>
+                Send Christian a short email or text with:
+                <ul className="list-disc pl-6 mt-3 space-y-1.5 font-light">
+                  <li>The company name and who you talked to (name, title)</li>
+                  <li>One paragraph on what they said they need</li>
+                  <li>Their timeline if they mentioned one</li>
+                  <li>Whether they have a budget approved or are still building the case</li>
+                </ul>
+              </>
+            )}
+          />
+          <HandoffStep n="04" text="Christian takes it from there. Cedar runs its own technical scoping conversation with the prospect." />
+        </ol>
+
+        <div className="mt-10 bg-[#F2F2F0] border border-gray-200 p-6 rounded-sm">
+          <p className="text-[14px] font-light leading-relaxed" style={{ color: COLORS.slateGray }}>
+            The deal becomes yours for commission purposes the moment Christian confirms back to you that the lead is qualified and Cedar is engaged.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* ABOUT */}
+    <section className="py-16 md:py-20 px-4 md:px-6">
+      <div className="max-w-4xl mx-auto">
+        <span className="text-[10px] font-bold uppercase tracking-[0.4em] block mb-3" style={{ color: COLORS.bronzeOnLight }}>For When Prospects Ask</span>
+        <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase mb-6" style={{ color: COLORS.cedarGreen }}>About Cedar</h2>
+        <div className="space-y-5 text-[15px] leading-relaxed font-light" style={{ color: COLORS.slateGray }}>
+          <p>
+            Cedar Infrastructure Group is an infrastructure services firm founded in 2026 and headquartered in Florence, South Carolina. We deploy mid-to-senior technical specialists across staff augmentation, project implementation, and advisory engagements for enterprise, mid-market, and federal customers.
+          </p>
+          <p>
+            <strong className="font-semibold" style={{ color: COLORS.cedarGreen }}>Christian Matthews, Founder & CEO.</strong> Fifteen-plus years in IT infrastructure. Former Global IT Director leading a multi-country IT operation across North America, Europe, and Australia. Former Practice Lead at a national IT consulting and VAR organization, where he built and ran a $1.6M field services and infrastructure delivery practice on top of a $5.6M enterprise networking practice. Currently leading Cedar as CEO and personally engaging with select clients in Fractional CIO and Infrastructure Architect advisory capacities.
+          </p>
+          <p>
+            <strong className="font-semibold" style={{ color: COLORS.cedarGreen }}>Website:</strong>{' '}
+            <a href="https://hirecedar.com" className="hover:underline" style={{ color: COLORS.bronzeOnLight }}>hirecedar.com</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+);
+
+const PartnerProduct = ({ n, title, tagline, body, sub, cue }) => (
+  <div className="bg-white border border-gray-100 shadow-sm p-7 rounded-sm flex flex-col">
+    <span className="text-[10px] font-bold tracking-[0.3em] mb-3" style={{ color: COLORS.bronzeOnLight }}>{n}</span>
+    <h3 className="text-xl font-bold uppercase tracking-tight mb-3" style={{ color: COLORS.cedarGreen }}>{title}</h3>
+    <p className="text-[13px] italic font-light mb-5 leading-relaxed" style={{ color: COLORS.bronzeOnLight }}>{tagline}</p>
+    <div className="space-y-3 text-[14px] font-light leading-relaxed mb-5" style={{ color: COLORS.slateGray }}>
+      {body.map((p, i) => <p key={i}>{p}</p>)}
+      {sub && (
+        <ul className="space-y-3 pt-1">
+          {sub.map((s, i) => (
+            <li key={i}>
+              <strong className="font-semibold" style={{ color: COLORS.cedarGreen }}>{s.label}.</strong> {s.text}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+    {cue && (
+      <div className="mt-auto pt-4 border-t border-gray-100">
+        <p className="text-[10px] font-bold uppercase tracking-[0.3em] mb-2" style={{ color: COLORS.bronzeOnLight }}>Best When They Say</p>
+        <p className="text-[13px] italic font-light leading-relaxed" style={{ color: COLORS.slateGray }}>{cue}</p>
+      </div>
+    )}
+  </div>
+);
+
+const RateRow = ({ role, what, rate }) => (
+  <tr className="border-b border-gray-100 align-top">
+    <td className="py-4 pr-4 font-semibold" style={{ color: COLORS.cedarGreen }}>{role}</td>
+    <td className="py-4 px-4">{what}</td>
+    <td className="py-4 pl-4 font-semibold whitespace-nowrap" style={{ color: COLORS.cedarGreen }}>{rate}</td>
+  </tr>
+);
+
+const DealRow = ({ deal, tcv, comm }) => (
+  <tr className="border-b border-gray-100 align-top last:border-b-0">
+    <td className="py-4 px-4">{deal}</td>
+    <td className="py-4 px-4 font-semibold whitespace-nowrap" style={{ color: COLORS.cedarGreen }}>{tcv}</td>
+    <td className="py-4 px-4 font-semibold" style={{ color: COLORS.bronzeOnLight }}>{comm}</td>
+  </tr>
+);
+
+const ProfileItem = ({ title, desc }) => (
+  <div>
+    <p className="text-[13px] font-bold mb-1" style={{ color: COLORS.cedarGreen }}>{title}</p>
+    <p className="text-[14px] font-light leading-relaxed" style={{ color: COLORS.slateGray }}>{desc}</p>
+  </div>
+);
+
+const PassItem = ({ text }) => (
+  <li className="flex items-start gap-2">
+    <XCircle size={14} className="mt-1 shrink-0 text-[#991B1B]" aria-hidden="true" />
+    <span>{text}</span>
+  </li>
+);
+
+const Quote = ({ text }) => (
+  <div className="bg-white border-l-4 p-5 rounded-sm shadow-sm" style={{ borderColor: COLORS.bronzeAccent }}>
+    <p className="text-[15px] italic font-light leading-relaxed" style={{ color: COLORS.slateGray }}>"{text}"</p>
+  </div>
+);
+
+const HandoffStep = ({ n, text }) => (
+  <li className="flex items-start gap-5 bg-white border border-gray-100 p-5 md:p-6 rounded-sm shadow-sm">
+    <span className="text-2xl md:text-3xl font-bold tracking-tight shrink-0" style={{ color: COLORS.bronzeAccent }}>{n}</span>
+    <div className="text-[15px] leading-relaxed pt-1" style={{ color: COLORS.slateGray }}>{text}</div>
+  </li>
+);
+
 
 export default App;
