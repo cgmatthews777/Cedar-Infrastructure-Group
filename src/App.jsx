@@ -212,7 +212,7 @@ const App = () => {
           <div className="space-y-3 min-w-0">
             <Logo isFooter />
             <p className="text-gray-400 text-sm leading-relaxed max-w-xs font-light">
-              Curated infrastructure capacity for enterprise IT, defense, government, VAR, and MSP delivery teams. Every specialist is technically vetted for scope, environment, and operational risk.
+              Curated IT infrastructure capacity for enterprise IT, defense, government, VAR, and MSP delivery teams. Every specialist is technically vetted for scope, environment, and operational risk.
             </p>
           </div>
 
@@ -280,9 +280,9 @@ const HomePage = ({ setPage }) => (
             className="text-lg md:text-xl mb-10 leading-relaxed font-light"
             style={{ color: COLORS.slateGray }}
           >
-            Cedar deploys mid-to-senior IT infrastructure specialists for remote, project, and managed capacity engagements.
-            Every specialist is technically reviewed against your scope, environment, and operational risk before deployment.
-            Engagements are accepted only when scope, urgency, and commercial posture are aligned with senior-level execution standards.
+            Cedar deploys IT network and infrastructure engineers, technical PMs, and fractional IT leadership for enterprise, government, and VAR/MSP delivery teams.
+            Engagements span architecture and design, burst support, and scoped project delivery.
+            Every specialist is vetted against your specific environment and risk profile before day one.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
