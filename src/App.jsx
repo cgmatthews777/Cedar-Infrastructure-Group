@@ -280,7 +280,7 @@ const HomePage = ({ setPage }) => (
             className="text-lg md:text-xl mb-10 leading-relaxed font-light"
             style={{ color: COLORS.slateGray }}
           >
-            Cedar deploys mid-to-senior infrastructure specialists for remote, project, and managed capacity engagements.
+            Cedar deploys mid-to-senior IT infrastructure specialists for remote, project, and managed capacity engagements.
             Every specialist is technically reviewed against your scope, environment, and operational risk before deployment.
             Engagements are accepted only when scope, urgency, and commercial posture are aligned with senior-level execution standards.
           </p>
@@ -775,6 +775,8 @@ const EngineersPage = ({ setPage }) => {
                   <option>Cloud Engineering (Azure)</option>
                   <option>Cloud Engineering (AWS)</option>
                   <option>Security Engineering</option>
+                  <option>Technical Project Management</option>
+                  <option>Program Management</option>
                   <option>Hybrid / Multi-Discipline</option>
                 </select>
               </InputWrapper>
@@ -799,7 +801,7 @@ const EngineersPage = ({ setPage }) => {
             <fieldset className="mt-8">
               <legend className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#0A140D] mb-2">Certifications (Select All That Apply)</legend>
               <div className="flex flex-wrap gap-4 pt-2">
-                {['CCNA', 'CCNP', 'CCIE', 'MCSE', 'Azure Solutions Architect', 'AWS Solutions Architect', 'VCP', 'CISSP', 'CompTIA Network+', 'CompTIA Security+', 'ITIL'].map(cert => (
+                {['CCNA', 'CCNP', 'CCIE', 'MCSE', 'Azure Solutions Architect', 'AWS Solutions Architect', 'VCP', 'CISSP', 'CompTIA Network+', 'CompTIA Security+', 'ITIL', 'PMP'].map(cert => (
                   <label key={cert} className="flex items-center space-x-3 text-sm font-light text-gray-600 cursor-pointer border border-gray-100 px-4 py-2 hover:bg-gray-50 transition-colors">
                     <input type="checkbox" name="cert" value={cert} className="w-4 h-4 accent-[#8B7355]" />
                     <span>{cert}</span>
