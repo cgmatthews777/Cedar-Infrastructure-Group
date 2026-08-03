@@ -2255,23 +2255,44 @@ const WebServicesPage = () => {
       </section>
 
       {/* CARE PLAN */}
-      <section className="py-16 md:py-24 px-6 text-white" style={{ backgroundColor: COLORS.cedarGreen }}>
-        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <section className="py-16 md:py-28 px-6 text-white" style={{ backgroundColor: COLORS.cedarGreen }}>
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.4em] mb-4" style={{ color: COLORS.bronzeDark }}>Care Plan</p>
-            <h2 className="text-2xl md:text-4xl font-bold tracking-tight leading-tight mb-5">We Don't Just Build It. We Run It.</h2>
-            <p className="text-base font-light leading-relaxed text-gray-300">
+            <p className="text-[11px] font-bold uppercase tracking-[0.4em] mb-5" style={{ color: COLORS.bronzeDark }}>Care Plan &middot; $125/mo</p>
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight leading-[1.12] mb-6">
+              We Don't Just Build It.<br />We Run It.
+            </h2>
+            <p className="text-base md:text-lg font-light leading-relaxed text-gray-300 mb-10">
               A website is not a one-time purchase. It is infrastructure. Every Cedar site is backed by a Care Plan
               that keeps it fast, secure, and current.
             </p>
-          </div>
-          <div className="bg-white/5 border border-white/10 p-8">
-            <div className="flex items-baseline justify-between mb-1">
-              <h3 className="text-sm font-bold uppercase tracking-[0.3em]" style={{ color: COLORS.bronzeDark }}>Care Plan</h3>
-              <p className="text-3xl font-bold tracking-tight">$125<span className="text-sm font-light text-gray-400">/mo</span></p>
+            <div className="space-y-7 border-l-2 pl-6 md:pl-8" style={{ borderColor: COLORS.bronzeAccent }}>
+              <div>
+                <h3 className="text-base md:text-lg font-bold tracking-tight mb-1.5">One flat monthly number.</h3>
+                <p className="text-[15px] font-light leading-relaxed text-gray-400">Hosting, domain renewal, security, and small updates in a single line item. No surprise invoices.</p>
+              </div>
+              <div>
+                <h3 className="text-base md:text-lg font-bold tracking-tight mb-1.5">Email us. It gets done.</h3>
+                <p className="text-[15px] font-light leading-relaxed text-gray-400">Your two monthly content updates are handled by the same team that built the site, usually within days.</p>
+              </div>
+              <div>
+                <h3 className="text-base md:text-lg font-bold tracking-tight mb-1.5">Leave cleanly, any time after year one.</h3>
+                <p className="text-[15px] font-light leading-relaxed text-gray-400">Cancel with 30 days' notice and take your domain and a full export of your site with you.</p>
+              </div>
             </div>
-            <p className="text-xs font-light italic text-gray-400 mb-6">12-month initial term, then month-to-month. Required for all Cedar-hosted sites.</p>
-            <ul className="space-y-3">
+          </div>
+          <div className="bg-white/5 border border-white/10 p-8 md:p-10">
+            <div className="flex items-end justify-between gap-4 pb-6 mb-6 border-b border-white/10">
+              <div>
+                <p className="text-4xl md:text-5xl font-bold tracking-tight leading-none">$125<span className="text-lg font-light text-gray-400">/mo</span></p>
+                <p className="text-sm font-light text-gray-400 mt-2">12-month initial term, then month-to-month.</p>
+              </div>
+              <span className="hidden sm:inline-block shrink-0 text-[10px] font-bold uppercase tracking-[0.25em] px-3 py-1.5 border" style={{ borderColor: 'rgba(163,138,106,0.5)', color: COLORS.bronzeDark }}>
+                All Cedar Sites
+              </span>
+            </div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.3em] mb-5" style={{ color: COLORS.bronzeDark }}>What your plan covers</p>
+            <ul className="space-y-4">
               {[
                 'Managed hosting on modern, fast infrastructure',
                 'Domain registration and renewal, so a lapsed domain never takes your site down',
@@ -2280,13 +2301,13 @@ const WebServicesPage = () => {
                 'Up to 2 content updates per month (event changes, photo swaps, text edits, just email us)',
                 'Backups and restore capability',
               ].map((item, i) => (
-                <li key={i} className="flex items-start space-x-3">
-                  <CheckCircle2 size={16} className="shrink-0 mt-1" style={{ color: COLORS.bronzeDark }} aria-hidden="true" />
-                  <span className="text-sm font-light leading-relaxed text-gray-200">{item}</span>
+                <li key={i} className="flex items-start space-x-3.5">
+                  <CheckCircle2 size={17} className="shrink-0 mt-0.5" style={{ color: COLORS.bronzeDark }} aria-hidden="true" />
+                  <span className="text-[15px] font-light leading-relaxed text-gray-100">{item}</span>
                 </li>
               ))}
             </ul>
-            <p className="mt-6 pt-5 border-t border-white/10 text-xs font-light leading-relaxed text-gray-400">
+            <p className="mt-7 pt-6 border-t border-white/10 text-sm font-light leading-relaxed text-gray-300">
               Additional changes beyond the monthly allowance are billed at $150/hr, quoted before work begins.
             </p>
           </div>
