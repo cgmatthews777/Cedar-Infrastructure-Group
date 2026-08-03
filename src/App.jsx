@@ -2079,41 +2079,38 @@ const WebServicesPage = () => {
   return (
     <div className="animate-in fade-in duration-700">
       {/* HERO */}
-      <section className="relative py-24 md:py-36 px-6 text-center lg:text-left overflow-hidden">
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="max-w-3xl">
-            <p className="text-[10px] font-bold uppercase tracking-[0.4em] mb-4" style={{ color: COLORS.bronzeOnLight }}>Cedar Web Services</p>
-            <h1 className="text-4xl md:text-6xl font-bold leading-[1.1] mb-6 tracking-tighter" style={{ color: COLORS.cedarGreen }}>
-              Enterprise Digital Infrastructure. <br />
-              <span className="font-extralight italic" style={{ color: COLORS.slateGray }}>
-                Enterprise Discipline. Fixed Pricing.
-              </span>
-            </h1>
-            <p className="text-lg md:text-xl mb-10 leading-relaxed font-light" style={{ color: COLORS.slateGray }}>
-              Cedar Infrastructure Group builds and operates websites for small businesses, churches, and community
-              organizations across the United States. The same firm trusted by Fortune 500 enterprises and U.S. defense
-              programs brings that standard to your website: scoped, priced, and delivered without the agency runaround.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-              <button
-                onClick={() => plansRef.current?.scrollIntoView({ behavior: 'smooth' })}
-                className="text-white px-8 py-4 text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center group"
-                style={{ backgroundColor: COLORS.cedarGreen }}
-              >
-                See Plans
-                <ChevronDown className="ml-2 group-hover:translate-y-0.5 transition-transform" size={16} aria-hidden="true" />
-              </button>
-              <a
-                href={webMailto('Web Services Inquiry')}
-                className="border px-8 py-4 text-xs font-bold uppercase tracking-widest transition-all text-center"
-                style={{ borderColor: COLORS.cedarGreen, color: COLORS.cedarGreen }}
-              >
-                Get Started
-              </a>
-            </div>
+      <section className="py-24 md:py-36 px-6 text-center">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-[10px] font-bold uppercase tracking-[0.4em] mb-4" style={{ color: COLORS.bronzeOnLight }}>Cedar Web Services</p>
+          <h1 className="text-4xl md:text-6xl font-bold leading-[1.1] mb-6 tracking-tighter" style={{ color: COLORS.cedarGreen }}>
+            Enterprise Digital Infrastructure. <br />
+            <span className="font-extralight italic" style={{ color: COLORS.slateGray }}>
+              Enterprise Discipline. Fixed Pricing.
+            </span>
+          </h1>
+          <p className="text-lg md:text-xl mb-10 leading-relaxed font-light max-w-3xl mx-auto" style={{ color: COLORS.slateGray }}>
+            Cedar Infrastructure Group builds and operates websites for small businesses, churches, and community
+            organizations across the United States. The same firm trusted by Fortune 500 enterprises and U.S. defense
+            programs brings that standard to your website: scoped, priced, and delivered without the agency runaround.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <button
+              onClick={() => plansRef.current?.scrollIntoView({ behavior: 'smooth' })}
+              className="text-white px-8 py-4 text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center group"
+              style={{ backgroundColor: COLORS.cedarGreen }}
+            >
+              See Plans
+              <ChevronDown className="ml-2 group-hover:translate-y-0.5 transition-transform" size={16} aria-hidden="true" />
+            </button>
+            <a
+              href={webMailto('Web Services Inquiry')}
+              className="border px-8 py-4 text-xs font-bold uppercase tracking-widest transition-all text-center"
+              style={{ borderColor: COLORS.cedarGreen, color: COLORS.cedarGreen }}
+            >
+              Get Started
+            </a>
           </div>
         </div>
-        <div className="absolute top-0 right-0 w-1/3 h-full -z-10 hidden lg:block" style={{ backgroundColor: `${COLORS.cedarGreen}05` }} />
       </section>
 
       {/* POSITIONING */}
