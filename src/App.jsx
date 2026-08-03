@@ -80,13 +80,19 @@ const Logo = ({ isFooter = false, isMobileNav = false }) => {
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState(() => {
+    const validPages = ['home', 'services', 'why-cedar', 'engineers', 'contact', 'email-policy', 'partners', 'web'];
     const hash = window.location.hash.replace('#', '');
-    const validPages = ['home', 'services', 'why-cedar', 'engineers', 'contact', 'email-policy', 'partners'];
-    return validPages.includes(hash) ? hash : 'home';
+    if (validPages.includes(hash)) return hash;
+    const path = window.location.pathname.replace(/^\/|\/$/g, '');
+    if (validPages.includes(path)) {
+      window.history.replaceState(null, '', `/#${path}`);
+      return path;
+    }
+    return 'home';
   });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const pageTitles = { home: 'Home', services: 'Services', 'why-cedar': 'Why Cedar', engineers: 'Join Cedar', contact: 'Contact', 'email-policy': 'Email Policy', partners: 'Channel Partner Brief' };
+  const pageTitles = { home: 'Home', services: 'Services', 'why-cedar': 'Why Cedar', engineers: 'Join Cedar', contact: 'Contact', 'email-policy': 'Email Policy', partners: 'Channel Partner Brief', web: 'Web Services' };
 
   useEffect(() => {
     document.title = `${pageTitles[currentPage] || 'Home'} - Cedar Infrastructure Group`;
@@ -204,6 +210,7 @@ const App = () => {
         {currentPage === 'contact' && <ContactPage />}
         {currentPage === 'email-policy' && <EmailPolicyPage />}
         {currentPage === 'partners' && <PartnersPage />}
+        {currentPage === 'web' && <WebServicesPage />}
       </main>
 
       {/* Footer */}
@@ -2023,5 +2030,308 @@ const PartnersPage = () => (
     <PartnersFinalBand />
   </div>
 );
+
+/* --- WEB SERVICES (unlisted /web) --- */
+
+const WEB_MAIL = 'projects@hirecedar.com';
+const webMailto = (subject) => `mailto:${WEB_MAIL}?subject=${encodeURIComponent(subject)}`;
+
+const WebInclude = ({ text }) => (
+  <li className="flex items-start space-x-3 text-left">
+    <CheckCircle2 size={16} className="shrink-0 mt-1" style={{ color: COLORS.bronzeAccent }} aria-hidden="true" />
+    <span className="text-sm font-light leading-relaxed" style={{ color: COLORS.slateGray }}>{text}</span>
+  </li>
+);
+
+const WebPlanCard = ({ title, price, tagline, lead, items, note, cta, ctaSubject, featured = false }) => (
+  <div className={`bg-white border shadow-sm flex flex-col h-full ${featured ? 'border-t-4' : ''}`} style={{ borderColor: COLORS.border, ...(featured ? { borderTopColor: COLORS.bronzeAccent } : {}) }}>
+    <div className="p-8 pb-6 border-b" style={{ borderColor: COLORS.border }}>
+      <h3 className="text-sm font-bold uppercase tracking-[0.3em] mb-3" style={{ color: COLORS.bronzeOnLight }}>{title}</h3>
+      <p className="text-3xl font-bold tracking-tight mb-2" style={{ color: COLORS.cedarGreen }}>{price}</p>
+      <p className="text-[15px] font-bold" style={{ color: COLORS.cedarGreen }}>{tagline}</p>
+      <p className="mt-3 text-sm font-light leading-relaxed" style={{ color: COLORS.slateGray }}>{lead}</p>
+    </div>
+    <div className="p-8 pt-6 flex flex-col flex-grow">
+      <ul className="space-y-3 mb-6">
+        {items.map((item, i) => <WebInclude key={i} text={item} />)}
+      </ul>
+      <p className="text-xs font-light italic leading-relaxed mb-6 mt-auto" style={{ color: COLORS.slateGray }}>{note}</p>
+      <a
+        href={webMailto(ctaSubject)}
+        className="block text-center text-white px-6 py-4 text-[10px] font-bold uppercase tracking-[0.3em] transition-all hover:bg-black"
+        style={{ backgroundColor: COLORS.cedarGreen }}
+      >
+        {cta}
+      </a>
+    </div>
+  </div>
+);
+
+const WebFaq = ({ q, a }) => (
+  <div className="border-b pb-6" style={{ borderColor: COLORS.border }}>
+    <h4 className="text-[15px] font-bold mb-2 tracking-tight" style={{ color: COLORS.cedarGreen }}>{q}</h4>
+    <p className="text-sm font-light leading-relaxed" style={{ color: COLORS.slateGray }}>{a}</p>
+  </div>
+);
+
+const WebServicesPage = () => {
+  const plansRef = React.useRef(null);
+  return (
+    <div className="animate-in fade-in duration-700">
+      {/* HERO */}
+      <section className="relative py-24 md:py-36 px-6 text-center lg:text-left overflow-hidden">
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="max-w-3xl">
+            <p className="text-[10px] font-bold uppercase tracking-[0.4em] mb-4" style={{ color: COLORS.bronzeOnLight }}>Cedar Web Services</p>
+            <h1 className="text-4xl md:text-6xl font-bold leading-[1.1] mb-6 tracking-tighter" style={{ color: COLORS.cedarGreen }}>
+              Enterprise Digital Infrastructure. <br />
+              <span className="font-extralight italic" style={{ color: COLORS.slateGray }}>
+                Enterprise Discipline. Fixed Pricing.
+              </span>
+            </h1>
+            <p className="text-lg md:text-xl mb-10 leading-relaxed font-light" style={{ color: COLORS.slateGray }}>
+              Cedar Infrastructure Group builds and operates websites for small businesses, churches, and community
+              organizations across the United States. The same firm trusted by Fortune 500 enterprises and U.S. defense
+              programs brings that standard to your website: scoped, priced, and delivered without the agency runaround.
+            </p>
+            <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+              <button
+                onClick={() => plansRef.current?.scrollIntoView({ behavior: 'smooth' })}
+                className="text-white px-8 py-4 text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center group"
+                style={{ backgroundColor: COLORS.cedarGreen }}
+              >
+                See Plans
+                <ChevronDown className="ml-2 group-hover:translate-y-0.5 transition-transform" size={16} aria-hidden="true" />
+              </button>
+              <a
+                href={webMailto('Web Services Inquiry')}
+                className="border px-8 py-4 text-xs font-bold uppercase tracking-widest transition-all text-center"
+                style={{ borderColor: COLORS.cedarGreen, color: COLORS.cedarGreen }}
+              >
+                Get Started
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="absolute top-0 right-0 w-1/3 h-full -z-10 hidden lg:block" style={{ backgroundColor: `${COLORS.cedarGreen}05` }} />
+      </section>
+
+      {/* POSITIONING */}
+      <section className="bg-white py-16 md:py-20 px-6 border-y border-gray-100">
+        <div className="max-w-4xl mx-auto text-center lg:text-left">
+          <h2 className="text-2xl md:text-3xl font-bold mb-5 tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>
+            No Proposals. No Discovery Calls. No Surprises.
+          </h2>
+          <p className="text-base md:text-lg font-light leading-relaxed mb-10" style={{ color: COLORS.slateGray }}>
+            Most web projects die in the quoting phase. Ours do not have one. Every plan below is fixed-price and
+            fixed-scope: you know the cost, the deliverable, and the timeline before we write a line of code.
+            Pick a plan, send us your content, and your site is live, typically within two weeks.
+          </p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.3em] mb-5" style={{ color: COLORS.bronzeOnLight }}>Every Cedar site includes</p>
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3">
+            <WebInclude text="Custom design. No templates, no page builders, no site that looks like your competitor's." />
+            <WebInclude text="Mobile-first, responsive layout." />
+            <WebInclude text="Fast load times and modern, enterprise-grade security practices." />
+            <WebInclude text="Contact forms that route where you need them." />
+            <WebInclude text="Search engine fundamentals done right from day one." />
+          </ul>
+        </div>
+      </section>
+
+      {/* PLANS */}
+      <section ref={plansRef} className="py-16 md:py-24 px-6" style={{ backgroundColor: COLORS.neutralBg }}>
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>Choose Your Build.</h2>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+            <WebPlanCard
+              title="Landing Page"
+              price="$3,500"
+              tagline="One page. Everything that matters. Live fast."
+              lead="The right choice for community groups, events, single-service businesses, and anyone who needs a professional presence without the sprawl."
+              items={[
+                'Custom single-page design, built to your brand',
+                'Contact form with email routing',
+                'Events calendar or schedule section',
+                'Photo gallery',
+                'Social media and registration links',
+                'One round of revisions',
+                'Launch and DNS setup',
+              ]}
+              note="Timeline: 1 to 2 weeks from content delivery."
+              cta="Start a Landing Page"
+              ctaSubject="Landing Page Build ($3,500)"
+            />
+            <WebPlanCard
+              featured
+              title="Multi-Page Site"
+              price="$6,500 to $9,500"
+              tagline="Up to six pages. Editable by you."
+              lead="For businesses and organizations that need room to grow: services pages, team bios, news, and a content management system so your staff can make updates without calling a developer."
+              items={[
+                'Everything in Landing Page',
+                'Up to 6 custom-designed pages',
+                'Content management system (edit text, photos, and events yourself)',
+                'Blog or news section',
+                'Staff and team profiles',
+                'Google Business Profile and map integration',
+                'Two rounds of revisions',
+              ]}
+              note="Timeline: 3 to 5 weeks from content delivery. Final price set by page count and features, confirmed in writing before work begins."
+              cta="Start a Multi-Page Site"
+              ctaSubject="Multi-Page Site Build"
+            />
+            <WebPlanCard
+              title="Custom & Web Applications"
+              price="Scoped Per Project"
+              tagline="When off-the-shelf isn't the job."
+              lead="Member portals, e-commerce, multi-location platforms, third-party integrations, and anything with logic behind it. Scoped and quoted as a formal project under Cedar's standard engagement process."
+              items={[
+                'E-commerce and payment integration',
+                'Membership and registration systems',
+                'Multi-site and multi-chapter platforms',
+                'API and back-office integrations',
+                'Migrations from legacy platforms',
+              ]}
+              note="Scope, price, and timeline are confirmed in writing before anything starts."
+              cta="Request a Scope"
+              ctaSubject="Custom Web Application Scope Request"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* CARE PLAN */}
+      <section className="py-16 md:py-24 px-6 text-white" style={{ backgroundColor: COLORS.cedarGreen }}>
+        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.4em] mb-4" style={{ color: COLORS.bronzeDark }}>Care Plan</p>
+            <h2 className="text-2xl md:text-4xl font-bold tracking-tight leading-tight mb-5">We Don't Just Build It. We Run It.</h2>
+            <p className="text-base font-light leading-relaxed text-gray-300">
+              A website is not a one-time purchase. It is infrastructure. Every Cedar site is backed by a Care Plan
+              that keeps it fast, secure, and current.
+            </p>
+          </div>
+          <div className="bg-white/5 border border-white/10 p-8">
+            <div className="flex items-baseline justify-between mb-1">
+              <h3 className="text-sm font-bold uppercase tracking-[0.3em]" style={{ color: COLORS.bronzeDark }}>Care Plan</h3>
+              <p className="text-3xl font-bold tracking-tight">$125<span className="text-sm font-light text-gray-400">/mo</span></p>
+            </div>
+            <p className="text-xs font-light italic text-gray-400 mb-6">12-month initial term, then month-to-month. Required for all Cedar-hosted sites.</p>
+            <ul className="space-y-3">
+              {[
+                'Managed hosting on modern, fast infrastructure',
+                'Domain registration and renewal, so a lapsed domain never takes your site down',
+                'SSL certificate and security updates',
+                'Uptime monitoring',
+                'Up to 2 content updates per month (event changes, photo swaps, text edits, just email us)',
+                'Backups and restore capability',
+              ].map((item, i) => (
+                <li key={i} className="flex items-start space-x-3">
+                  <CheckCircle2 size={16} className="shrink-0 mt-1" style={{ color: COLORS.bronzeDark }} aria-hidden="true" />
+                  <span className="text-sm font-light leading-relaxed text-gray-200">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 pt-5 border-t border-white/10 text-xs font-light leading-relaxed text-gray-400">
+              Additional changes beyond the monthly allowance are billed at $150/hr, quoted before work begins.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* DOMAIN POLICY */}
+      <section className="bg-white py-16 md:py-20 px-6 border-b border-gray-100">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold mb-5 tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>
+            Your Domain Is Yours. Full Stop.
+          </h2>
+          <p className="text-base font-light leading-relaxed mb-8" style={{ color: COLORS.slateGray }}>
+            Cedar registers and manages your domain during your Care Plan so renewals never slip through the cracks.
+            A lapsed domain is the most common way small organizations lose their web presence overnight.
+            But it is your name, and it stays that way:
+          </p>
+          <ul className="space-y-3 mb-8">
+            <WebInclude text="You are listed as the registrant of record." />
+            <WebInclude text="If you ever leave, we initiate transfer to your registrar within 10 business days of your request, guaranteed in writing in our service agreement." />
+            <WebInclude text="Your only cost is the registrar's standard transfer fee, if any." />
+          </ul>
+          <p className="text-sm font-bold uppercase tracking-[0.2em]" style={{ color: COLORS.bronzeOnLight }}>
+            No hostage domains. No exit penalties. We keep clients with service, not lock-in.
+          </p>
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section className="py-16 md:py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>Four Steps to Live.</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <HowStep n="01" title="Pick Your Plan" desc="Fixed price, fixed scope. You already know the number." />
+            <HowStep n="02" title="Send Your Content" desc="Text, photos, logos, links. We provide a simple checklist of what we need." />
+            <HowStep n="03" title="Review Your Build" desc="We deliver a live preview. You mark it up; we revise." />
+            <HowStep n="04" title="Launch" desc="DNS, forms, and analytics configured. Your site is live and on a Care Plan from day one." />
+          </div>
+        </div>
+      </section>
+
+      {/* WHO THIS IS FOR */}
+      <section className="bg-white py-16 md:py-20 px-6 border-y border-gray-100">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold mb-5 tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>Who This Is For.</h2>
+          <p className="text-base font-light leading-relaxed mb-6" style={{ color: COLORS.slateGray }}>
+            Businesses of all sizes and sectors, churches and ministries, community organizations, nonprofits,
+            medical and professional practices, trades and contractors. Anyone in the United States and its
+            territories who needs a serious web presence without agency pricing or DIY headaches.
+          </p>
+          <p className="text-sm font-light leading-relaxed" style={{ color: COLORS.slateGray }}>
+            If your technology needs extend beyond web development, enterprise networking, infrastructure staffing,
+            and scoped IT delivery remain Cedar's core practice.{' '}
+            <a href="/" className="font-bold hover:underline uppercase text-xs tracking-wider" style={{ color: COLORS.bronzeOnLight }}>Learn more</a>.
+          </p>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-16 md:py-24 px-6">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold mb-10 tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>Questions, Answered.</h2>
+          <div className="space-y-6">
+            <WebFaq q="Why is there no hourly rate on builds?" a="Because you shouldn't pay for our meetings. Fixed scope means the price is the price, and efficiency is our problem, not your bill." />
+            <WebFaq q="Can I edit the site myself?" a="Multi-Page Sites include a CMS for self-service edits. Landing Pages are maintained by us. That's what your 2 monthly Care Plan updates are for." />
+            <WebFaq q="What if I need more than 6 pages?" a="That's a Custom engagement. We'll scope it in writing before anything starts." />
+            <WebFaq q="Do you do e-commerce?" a="Yes, under Custom & Web Applications." />
+            <WebFaq q="What happens if I cancel my Care Plan?" a="After the 12-month initial term, cancel with 30 days' notice. We hand over your domain and a full export of your site files. Domains not claimed within 90 days of termination may be released." />
+            <WebFaq q="Do you work outside the United States?" a="No. We serve U.S. customers exclusively. Sites are built to U.S. accessibility (ADA) and data management standards; we do not offer GDPR compliance for international audiences." />
+          </div>
+        </div>
+      </section>
+
+      {/* CLOSING CTA */}
+      <section className="py-16 md:py-24 px-6 text-white text-center" style={{ backgroundColor: COLORS.cedarGreen }}>
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-5">Ready When You Are.</h2>
+          <p className="text-base font-light leading-relaxed text-gray-300 mb-8">
+            One email starts it. Tell us which plan fits and what you're building.
+            We'll reply with the content checklist and a start date.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <a
+              href={webMailto('Web Services Inquiry')}
+              className="text-white border border-white/40 hover:bg-white hover:text-black px-8 py-4 text-xs font-bold uppercase tracking-widest transition-all flex items-center group"
+            >
+              Get Started
+              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={16} aria-hidden="true" />
+            </a>
+            <a href={`mailto:${WEB_MAIL}`} className="text-sm font-light hover:underline" style={{ color: COLORS.bronzeDark }}>{WEB_MAIL}</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
 
 export default App;
