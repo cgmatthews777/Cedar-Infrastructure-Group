@@ -351,8 +351,7 @@ const ServicesPage = ({ setPage }) => (
   <div className="animate-in slide-in-from-bottom-4 duration-500">
     <section className="pt-20 pb-16 px-6 bg-[#FBFBF9] border-b border-gray-100">
       <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tighter uppercase leading-[0.95]" style={{ color: COLORS.cedarGreen }}>Services</h2>
-        <p className="text-2xl md:text-3xl font-extralight italic tracking-tight mb-6" style={{ color: COLORS.slateGray }}>Vetted. Calibrated. Deployed.</p>
+        <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter uppercase leading-[0.95]" style={{ color: COLORS.cedarGreen }}>Services</h2>
         <div className="h-[2px] w-16 bg-[#8B7355] mx-auto mb-8" />
         <p className="text-sm md:text-base font-light leading-relaxed max-w-2xl mx-auto text-gray-500">
           Cedar deploys IT network and infrastructure engineers, technical PMs, and fractional IT leadership for
