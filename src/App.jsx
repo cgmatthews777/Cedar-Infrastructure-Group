@@ -400,10 +400,10 @@ const ServicesPage = ({ setPage }) => (
           <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
             <ScenarioCard icon={<Activity size={18} />} title="Hard deadline migrations" desc="Data center exits, lease events, and compliance windows." />
             <ScenarioCard icon={<Network size={18} />} title="SD-WAN and core rollouts" desc="Multi-site cutovers where downtime has direct cost." />
-            <ScenarioCard icon={<Cloud size={18} />} title="Landing zone hardening" desc="Production-ready Azure/AWS foundations and guardrails." />
             <ScenarioCard icon={<Layers size={18} />} title="Post-acquisition integration" desc="Rapid standardization, network convergence, and control." />
             <ScenarioCard icon={<TrendingUp size={18} />} title="Practice overflow spikes" desc="Delivery surge capacity without long-term structural load." />
             <ScenarioCard icon={<AlertCircle size={18} />} title="Escalation recovery" desc="Corrective capacity when internal throughput breaks down." />
+            <ScenarioCard icon={<Globe size={18} />} title="Web development and digital identity" desc="Fixed-price websites and digital presence, built to Cedar standards." />
           </div>
         </div>
       </section>
@@ -469,33 +469,11 @@ const ServicesPage = ({ setPage }) => (
           <h2 className="text-2xl md:text-3xl font-bold mb-4 tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>Execution Disciplines</h2>
           <div className="h-[2px] w-12" style={{ backgroundColor: COLORS.bronzeAccent }} aria-hidden="true" />
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           <ServiceCard icon={<Server size={32} />} title="Systems Engineering" items={["Senior compute specialists for virtualization and platform stability", "Hardened server OS execution in regulated, high-control, and classified environments", "High-availability architecture support and zero-drift operational controls"]} />
           <ServiceCard icon={<Network size={32} />} title="Network Engineering" items={["Carrier-grade network specialists for multi-site rollouts", "Multi-vendor routing and security implementation depth", "Controlled SD-WAN execution to remove latency and reliability bottlenecks"]} />
           <ServiceCard icon={<Cloud size={32} />} title="Cloud Implementation" items={["Production-ready Azure/AWS foundations and governance guardrails", "Migration specialists for low-risk workload transitions", "Hybrid identity and secure cloud connectivity execution"]} />
-        </div>
-
-        {/* WEB DEVELOPMENT */}
-        <div className="mt-8 bg-white border border-gray-100 border-t-2 shadow-sm hover:shadow-md transition-all p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-10" style={{ borderTopColor: COLORS.bronzeAccent }}>
-        <div className="shrink-0" style={{ color: COLORS.cedarGreen }} aria-hidden="true">
-          <Globe size={32} />
-        </div>
-        <div className="flex-grow">
-          <h3 className="font-bold text-lg tracking-tight uppercase mb-2" style={{ color: COLORS.cedarGreen }}>Web Development</h3>
-          <p className="text-base font-light text-gray-600 leading-relaxed max-w-3xl">
-            The same execution discipline, packaged for small businesses, churches, and community organizations.
-            Custom-designed websites at a fixed price, from $3,500, typically live within two weeks, with managed
-            hosting and enterprise security standards behind them.
-          </p>
-        </div>
-        <button
-          onClick={() => { setPage('web'); }}
-          className="shrink-0 inline-flex items-center text-[11px] font-bold uppercase tracking-[0.3em] group"
-          style={{ color: COLORS.bronzeOnLight }}
-        >
-          Explore Web Services
-          <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={14} aria-hidden="true" />
-        </button>
+          <ServiceCard icon={<Globe size={32} />} title="Web Development" items={["Fixed-price custom websites for small businesses, churches, and community organizations", "Managed hosting, domains, and professional email under one Care Plan", "Built to the same security standards Cedar brings to enterprise networks"]} cta={{ label: 'Explore Web Services', onClick: () => setPage('web') }} />
         </div>
       </section>
     </div>
@@ -1312,18 +1290,28 @@ const ValueProp = ({ number, title, desc }) => (
   </div>
 );
 
-const ServiceCard = ({ icon, title, items }) => (
-  <div className="p-12 bg-white border border-gray-100 hover:shadow-xl transition-all group duration-500 text-left">
+const ServiceCard = ({ icon, title, items, cta }) => (
+  <div className="p-8 xl:p-10 bg-white border border-gray-100 hover:shadow-xl transition-all group duration-500 text-left flex flex-col">
     <div className="mb-8 group-hover:scale-110 transition-transform duration-500 inline-block text-slate-400 group-hover:text-[#8B7355]" aria-hidden="true">{icon}</div>
     <h3 className="text-xl font-bold mb-8 tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>{title}</h3>
     <ul className="space-y-4">
       {items.map((item, idx) => (
-        <li key={idx} className="text-sm font-light flex items-center space-x-3 text-gray-500">
-          <ChevronRight size={14} style={{ color: COLORS.bronzeAccent }} aria-hidden="true" />
+        <li key={idx} className="text-sm font-light flex items-start space-x-3 text-gray-500">
+          <ChevronRight size={14} className="shrink-0 mt-1" style={{ color: COLORS.bronzeAccent }} aria-hidden="true" />
           <span>{item}</span>
         </li>
       ))}
     </ul>
+    {cta && (
+      <button
+        onClick={cta.onClick}
+        className="mt-8 pt-6 border-t border-gray-100 inline-flex items-center text-[11px] font-bold uppercase tracking-[0.3em] group/cta text-left"
+        style={{ color: COLORS.bronzeOnLight }}
+      >
+        {cta.label}
+        <ArrowRight className="ml-2 group-hover/cta:translate-x-1 transition-transform shrink-0" size={14} aria-hidden="true" />
+      </button>
+    )}
   </div>
 );
 
