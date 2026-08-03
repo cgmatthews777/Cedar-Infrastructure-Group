@@ -2467,6 +2467,9 @@ const WebServicesPage = () => {
           </div>
         </div>
       </section>
+
+      {/* separator before global footer */}
+      <div aria-hidden="true" className="h-[3px] w-full" style={{ backgroundColor: COLORS.bronzeAccent }} />
     </div>
   );
 };
