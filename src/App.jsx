@@ -990,7 +990,7 @@ const ContactPage = () => {
             We align scope, delivery window, and commercial posture before confirming specialist availability.
           </p>
           <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-[#B45309]">
-            Cedar supports United States-based organizations and United States-based engagements only.
+            Cedar supports United States-based organizations<br />and United States-based engagements only.
           </p>
         </div>
       </section>
