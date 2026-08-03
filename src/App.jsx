@@ -2048,7 +2048,7 @@ const WebStyles = () => (
 const WebEyebrow = ({ children, light = false }) => (
   <div className="flex items-center justify-center gap-4 mb-4">
     <span className="h-px w-8" style={{ backgroundColor: light ? 'rgba(163,138,106,0.6)' : COLORS.bronzeAccent }} aria-hidden="true" />
-    <span className="text-[10px] font-bold uppercase tracking-[0.4em]" style={{ color: light ? COLORS.bronzeDark : COLORS.bronzeOnLight }}>{children}</span>
+    <span className="text-[13px] font-bold uppercase tracking-[0.3em]" style={{ color: light ? COLORS.bronzeDark : COLORS.bronzeOnLight }}>{children}</span>
     <span className="h-px w-8" style={{ backgroundColor: light ? 'rgba(163,138,106,0.6)' : COLORS.bronzeAccent }} aria-hidden="true" />
   </div>
 );
@@ -2068,9 +2068,9 @@ const WebPlanCard = ({ title, price, priceCaption, tagline, lead, items, note, c
       </span>
     )}
     <div className="p-8 pb-6 border-b" style={{ borderColor: COLORS.border }}>
-      <h3 className="text-sm font-bold uppercase tracking-[0.3em] mb-4" style={{ color: COLORS.bronzeOnLight }}>{title}</h3>
+      <h3 className="text-[15px] font-bold uppercase tracking-[0.25em] mb-4" style={{ color: COLORS.bronzeOnLight }}>{title}</h3>
       <p className="text-4xl font-bold tracking-tight" style={{ color: COLORS.cedarGreen }}>{price}</p>
-      <p className="text-[11px] font-light uppercase tracking-[0.2em] mt-1 mb-4 text-gray-400">{priceCaption}</p>
+      <p className="text-[12px] font-light uppercase tracking-[0.15em] mt-1 mb-4 text-gray-500">{priceCaption}</p>
       <p className="text-[15px] font-bold" style={{ color: COLORS.cedarGreen }}>{tagline}</p>
       <p className="mt-3 text-sm font-light leading-relaxed" style={{ color: COLORS.slateGray }}>{lead}</p>
     </div>
@@ -2155,7 +2155,7 @@ const WebServicesPage = () => {
           </p>
           <div className="web-rise mt-10 grid grid-cols-2 gap-x-4 gap-y-3 max-w-md mx-auto sm:max-w-none sm:flex sm:flex-wrap sm:justify-center sm:gap-x-8" style={{ animationDelay: '0.38s' }}>
             {['Fixed Pricing', 'Live In About Two Weeks', 'U.S. Based Delivery', 'Enterprise Security Standards'].map(chip => (
-              <span key={chip} className="flex items-start sm:items-center gap-2 text-[10px] font-bold uppercase tracking-[0.25em] text-left" style={{ color: COLORS.cedarGreen }}>
+              <span key={chip} className="flex items-start sm:items-center gap-2 text-[12px] font-bold uppercase tracking-[0.2em] text-left" style={{ color: COLORS.cedarGreen }}>
                 <CheckCircle2 size={13} className="shrink-0 mt-0.5 sm:mt-0" style={{ color: COLORS.bronzeAccent }} aria-hidden="true" />
                 {chip}
               </span>
@@ -2175,7 +2175,7 @@ const WebServicesPage = () => {
             fixed-scope: you know the cost, the deliverable, and the timeline before we write a line of code.
             Pick a plan, send us your content, and your site is live, typically within two weeks.
           </p>
-          <p className="text-[10px] font-bold uppercase tracking-[0.3em] mb-5" style={{ color: COLORS.bronzeOnLight }}>Every Cedar site includes</p>
+          <p className="text-[13px] font-bold uppercase tracking-[0.25em] mb-5" style={{ color: COLORS.bronzeOnLight }}>Every Cedar site includes</p>
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-3">
             <WebInclude text="Custom design. No templates, no page builders, no site that looks like your competitor's." />
             <WebInclude text="Mobile-first, responsive layout." />
@@ -2258,7 +2258,7 @@ const WebServicesPage = () => {
       <section className="py-16 md:py-28 px-6 text-white" style={{ backgroundColor: COLORS.cedarGreen }}>
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.4em] mb-5" style={{ color: COLORS.bronzeDark }}>Care Plan &middot; $125/mo</p>
+            <p className="text-[13px] font-bold uppercase tracking-[0.3em] mb-5" style={{ color: COLORS.bronzeDark }}>Care Plan &middot; $125/mo</p>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight leading-[1.12] mb-6">
               We Don't Just Build It.<br />We Run It.
             </h2>
@@ -2291,7 +2291,7 @@ const WebServicesPage = () => {
                 All Cedar Sites
               </span>
             </div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.3em] mb-5" style={{ color: COLORS.bronzeDark }}>What your plan covers</p>
+            <p className="text-[13px] font-bold uppercase tracking-[0.25em] mb-5" style={{ color: COLORS.bronzeDark }}>What your plan covers</p>
             <ul className="space-y-4">
               {[
                 'Managed hosting on modern, fast infrastructure',
