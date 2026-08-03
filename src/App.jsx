@@ -475,6 +475,35 @@ const ServicesPage = ({ setPage }) => (
           <ServiceCard icon={<Cloud size={32} />} title="Cloud Implementation" items={["Production-ready Azure/AWS foundations and governance guardrails", "Migration specialists for low-risk workload transitions", "Hybrid identity and secure cloud connectivity execution"]} />
         </div>
       </section>
+
+      {/* WEB DEVELOPMENT */}
+      <section className="mt-24 text-white p-10 md:p-14" style={{ backgroundColor: COLORS.cedarGreen }}>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-8">
+            <span className="text-[12px] font-bold uppercase tracking-[0.3em] block mb-3" style={{ color: COLORS.bronzeDark }}>
+              Also From Cedar
+            </span>
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4">
+              Web Development. Fixed Price. Enterprise Discipline.
+            </h2>
+            <p className="text-base font-light leading-relaxed text-gray-300 max-w-2xl">
+              Cedar designs, builds, and operates websites for small businesses, churches, and community
+              organizations across the United States. Custom design, enterprise security standards, and managed
+              hosting, at a fixed price with no proposals and no hourly billing. Builds from $3,500, typically
+              live within two weeks.
+            </p>
+          </div>
+          <div className="lg:col-span-4 flex lg:justify-end">
+            <button
+              onClick={() => { setPage('web'); }}
+              className="text-white border border-white/40 hover:bg-white hover:text-black px-8 py-4 text-[11px] font-bold uppercase tracking-[0.3em] transition-all inline-flex items-center group"
+            >
+              Explore Web Services
+              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={15} aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 );
