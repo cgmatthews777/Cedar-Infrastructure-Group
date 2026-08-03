@@ -469,11 +469,11 @@ const ServicesPage = ({ setPage }) => (
           <h2 className="text-2xl md:text-3xl font-bold mb-4 tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>Execution Disciplines</h2>
           <div className="h-[2px] w-12" style={{ backgroundColor: COLORS.bronzeAccent }} aria-hidden="true" />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <ServiceCard icon={<Server size={32} />} title="Systems Engineering" items={["Senior compute specialists for virtualization and platform stability", "Hardened server OS execution in regulated, high-control, and classified environments", "High-availability architecture support and zero-drift operational controls"]} />
           <ServiceCard icon={<Network size={32} />} title="Network Engineering" items={["Carrier-grade network specialists for multi-site rollouts", "Multi-vendor routing and security implementation depth", "Controlled SD-WAN execution to remove latency and reliability bottlenecks"]} />
           <ServiceCard icon={<Cloud size={32} />} title="Cloud Implementation" items={["Production-ready Azure/AWS foundations and governance guardrails", "Migration specialists for low-risk workload transitions", "Hybrid identity and secure cloud connectivity execution"]} />
-          <ServiceCard icon={<Globe size={32} />} title="Web Development" items={["Fixed-price custom websites for small businesses, churches, and community organizations", "Managed hosting, domains, and professional email under one Care Plan", "Built to the same security standards Cedar brings to enterprise networks"]} cta={{ label: 'Explore Web Services', onClick: () => setPage('web') }} />
+          <ServiceCard icon={<Globe size={32} />} title="Web Development" items={["Fixed-price custom websites for organizations of every size and sector", "Managed hosting, domains, and professional email under one Care Plan", "Built to the same security standards Cedar brings to enterprise networks"]} cta={{ label: 'Explore Web Services', onClick: () => setPage('web') }} />
         </div>
       </section>
     </div>
@@ -1291,7 +1291,7 @@ const ValueProp = ({ number, title, desc }) => (
 );
 
 const ServiceCard = ({ icon, title, items, cta }) => (
-  <div className="p-8 xl:p-10 bg-white border border-gray-100 hover:shadow-xl transition-all group duration-500 text-left flex flex-col">
+  <div className="p-10 lg:p-12 bg-white border border-gray-100 hover:shadow-xl transition-all group duration-500 text-left flex flex-col">
     <div className="mb-8 group-hover:scale-110 transition-transform duration-500 inline-block text-slate-400 group-hover:text-[#8B7355]" aria-hidden="true">{icon}</div>
     <h3 className="text-xl font-bold mb-8 tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>{title}</h3>
     <ul className="space-y-4">
@@ -2140,9 +2140,9 @@ const WebServicesPage = () => {
             </span>
           </h1>
           <p className="web-rise text-base md:text-xl mb-10 leading-relaxed font-light max-w-3xl mx-auto" style={{ color: COLORS.slateGray, animationDelay: '0.16s' }}>
-            Cedar Infrastructure Group builds and operates websites for small businesses, churches, and community
-            organizations across the United States. The same firm trusted by Fortune 500 enterprises and U.S. defense
-            programs brings that standard to your website: scoped, priced, and delivered without the agency runaround.
+            Cedar Infrastructure Group builds and operates websites for organizations of every size and sector
+            across the United States. The same IT infrastructure consulting firm trusted by Fortune 500
+            enterprises and U.S. defense programs brings that standard to your website: scoped, priced, and delivered without the agency runaround.
           </p>
           <div className="web-rise flex flex-col sm:flex-row justify-center gap-4" style={{ animationDelay: '0.24s' }}>
             <button
