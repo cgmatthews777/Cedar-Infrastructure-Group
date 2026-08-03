@@ -348,36 +348,38 @@ const HomePage = ({ setPage }) => (
 );
 
 const ServicesPage = ({ setPage }) => (
-  <div className="py-24 px-6 animate-in slide-in-from-bottom-4 duration-500">
-    <div className="max-w-7xl mx-auto">
-      <section className="mb-20">
-        <div className="max-w-4xl">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tighter leading-[1.05]" style={{ color: COLORS.cedarGreen }}>
-            Curated Infrastructure Capacity. <br />Governance. Calibration. Deployment.
-          </h2>
-          <p className="text-lg md:text-xl font-light text-gray-600 leading-relaxed max-w-3xl">
-            Infrastructure talent selection is a risk decision. Cedar curates mid-to-senior infrastructure specialists for complex environments,
-            applies executive technical governance before deployment, and protects continuity through delivery for commercially mature engagements.
-          </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-3">
-            <button
-              onClick={() => { setPage('contact'); }}
-              className="text-white px-8 py-4 text-[10px] font-bold uppercase tracking-[0.3em] transition-all shadow-md hover:shadow-xl hover:bg-black"
-              style={{ backgroundColor: COLORS.cedarGreen }}
-            >
-              Initiate Capacity Request
-            </button>
-            <button
-              onClick={() => { setPage('contact'); }}
-              className="border-2 px-8 py-4 text-[10px] font-bold uppercase tracking-[0.3em] transition-all hover:bg-gray-50"
-              style={{ borderColor: COLORS.cedarGreen, color: COLORS.cedarGreen }}
-            >
-              Submit Scope
-            </button>
-          </div>
+  <div className="animate-in slide-in-from-bottom-4 duration-500">
+    <section className="pt-20 pb-16 px-6 bg-[#FBFBF9] border-b border-gray-100">
+      <div className="max-w-4xl mx-auto text-center">
+        <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tighter uppercase leading-[0.95]" style={{ color: COLORS.cedarGreen }}>Services</h2>
+        <p className="text-2xl md:text-3xl font-extralight italic tracking-tight mb-6" style={{ color: COLORS.slateGray }}>Vetted. Calibrated. Deployed.</p>
+        <div className="h-[2px] w-16 bg-[#8B7355] mx-auto mb-8" />
+        <p className="text-sm md:text-base font-light leading-relaxed max-w-2xl mx-auto text-gray-500">
+          Cedar deploys IT network and infrastructure engineers, technical PMs, and fractional IT leadership for
+          enterprise, government, and VAR/MSP delivery teams. Every engagement is scoped, calibrated to your
+          environment, and delivered to senior-level execution standards.
+        </p>
+        <div className="mt-10 flex flex-col sm:flex-row justify-center gap-3">
+          <button
+            onClick={() => { setPage('contact'); }}
+            className="text-white px-8 py-4 text-[10px] font-bold uppercase tracking-[0.3em] transition-all shadow-md hover:shadow-xl hover:bg-black"
+            style={{ backgroundColor: COLORS.cedarGreen }}
+          >
+            Initiate Capacity Request
+          </button>
+          <button
+            onClick={() => { setPage('contact'); }}
+            className="border-2 px-8 py-4 text-[10px] font-bold uppercase tracking-[0.3em] transition-all hover:bg-gray-50"
+            style={{ borderColor: COLORS.cedarGreen, color: COLORS.cedarGreen }}
+          >
+            Submit Scope
+          </button>
         </div>
-      </section>
+      </div>
+    </section>
 
+    <div className="py-24 px-6">
+    <div className="max-w-7xl mx-auto">
       <section className="mb-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-4">
@@ -476,6 +478,7 @@ const ServicesPage = ({ setPage }) => (
           <ServiceCard icon={<Globe size={32} />} title="Web Development" items={["Fixed-price custom websites for organizations of every size and sector", "Managed hosting, domains, and professional email under one Care Plan", "Built to the same security standards Cedar brings to enterprise networks"]} cta={{ label: 'Explore Web Services', onClick: () => setPage('web') }} />
         </div>
       </section>
+    </div>
     </div>
   </div>
 );
@@ -631,15 +634,18 @@ const EngineersPage = ({ setPage }) => {
   };
 
   return (
-  <div className="py-24 px-6 animate-in slide-in-from-bottom-4 duration-500">
-    <div className="max-w-7xl mx-auto">
-      {/* Hero Header */}
-      <div className="max-w-4xl mx-auto text-center mb-16">
-        <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>Join Cedar</h2>
-        <p className="text-lg font-light leading-relaxed max-w-3xl mx-auto" style={{ color: COLORS.slateGray }}>
+  <div className="animate-in slide-in-from-bottom-4 duration-500">
+    <section className="pt-20 pb-16 px-6 bg-[#FBFBF9] border-b border-gray-100">
+      <div className="max-w-4xl mx-auto text-center">
+        <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter uppercase leading-[0.95]" style={{ color: COLORS.cedarGreen }}>Join Cedar</h2>
+        <div className="h-[2px] w-16 bg-[#8B7355] mx-auto mb-8" />
+        <p className="text-sm md:text-base font-light leading-relaxed max-w-2xl mx-auto text-gray-500">
           Cedar works with independent mid-to-senior infrastructure specialists who can deliver in enterprise, defense, government, and VAR environments with minimal supervision.
         </p>
       </div>
+    </section>
+    <div className="py-16 md:py-20 px-6">
+    <div className="max-w-7xl mx-auto">
 
       {/* Four Baseline Tiles */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
@@ -938,6 +944,7 @@ const EngineersPage = ({ setPage }) => {
         </form>
       </div>
     </div>
+    </div>
   </div>
   );
 };
@@ -974,26 +981,22 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="py-24 px-6 animate-in fade-in duration-500 text-left">
-      <div className="max-w-5xl mx-auto">
-        {/* HEADER SECTION */}
-        <section className="mb-12">
-          <h2 className="text-4xl md:text-6xl font-bold mb-4 tracking-tighter leading-none" style={{ color: COLORS.cedarGreen }}>
-            Request Capacity
-          </h2>
-          <p className="text-xl font-light text-gray-600 tracking-tight mb-2">
+    <div className="animate-in fade-in duration-500 text-left">
+      <section className="pt-20 pb-16 px-6 bg-[#FBFBF9] border-b border-gray-100">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter uppercase leading-[0.95]" style={{ color: COLORS.cedarGreen }}>Request Capacity</h2>
+          <div className="h-[2px] w-16 bg-[#8B7355] mx-auto mb-8" />
+          <p className="text-sm md:text-base font-light leading-relaxed max-w-2xl mx-auto text-gray-500 mb-6">
             Structured intake for organizations requiring vetted infrastructure execution capacity.
+            We align scope, delivery window, and commercial posture before confirming specialist availability.
           </p>
-          <div className="flex flex-col space-y-4">
-            <p className="text-sm font-bold uppercase tracking-widest text-[#B45309]">
-              Cedar supports United States-based organizations and United States-based engagements only.
-            </p>
-            <p className="text-sm font-light text-gray-500 leading-relaxed italic max-w-2xl">
-              We align scope, delivery window, and commercial posture before confirming specialist availability.
-            </p>
-            <div className="h-[1px] w-24 mt-4" style={{ backgroundColor: COLORS.bronzeAccent }} />
-          </div>
-        </section>
+          <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-[#B45309]">
+            Cedar supports United States-based organizations and United States-based engagements only.
+          </p>
+        </div>
+      </section>
+      <div className="py-16 md:py-20 px-6">
+      <div className="max-w-5xl mx-auto">
 
         <form className="space-y-12" onSubmit={handleSubmit}>
           {/* SECTION 1 - ORGANIZATION PROFILE */}
@@ -1275,6 +1278,7 @@ const ContactPage = () => {
             </p>
           </div>
         </form>
+      </div>
       </div>
     </div>
   );
