@@ -2036,6 +2036,23 @@ const PartnersPage = () => (
 const WEB_MAIL = 'projects@hirecedar.com';
 const webMailto = (subject) => `mailto:${WEB_MAIL}?subject=${encodeURIComponent(subject)}`;
 
+const WebStyles = () => (
+  <style>{`
+    @keyframes webRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    .web-rise { opacity: 0; animation: webRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    .web-plan-card { transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease; }
+    .web-plan-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -20px rgba(10, 20, 13, 0.25); }
+  `}</style>
+);
+
+const WebEyebrow = ({ children, light = false }) => (
+  <div className="flex items-center justify-center gap-4 mb-4">
+    <span className="h-px w-8" style={{ backgroundColor: light ? 'rgba(163,138,106,0.6)' : COLORS.bronzeAccent }} aria-hidden="true" />
+    <span className="text-[10px] font-bold uppercase tracking-[0.4em]" style={{ color: light ? COLORS.bronzeDark : COLORS.bronzeOnLight }}>{children}</span>
+    <span className="h-px w-8" style={{ backgroundColor: light ? 'rgba(163,138,106,0.6)' : COLORS.bronzeAccent }} aria-hidden="true" />
+  </div>
+);
+
 const WebInclude = ({ text }) => (
   <li className="flex items-start space-x-3 text-left">
     <CheckCircle2 size={16} className="shrink-0 mt-1" style={{ color: COLORS.bronzeAccent }} aria-hidden="true" />
@@ -2043,11 +2060,17 @@ const WebInclude = ({ text }) => (
   </li>
 );
 
-const WebPlanCard = ({ title, price, tagline, lead, items, note, cta, ctaSubject, featured = false }) => (
-  <div className={`bg-white border shadow-sm flex flex-col h-full ${featured ? 'border-t-4' : ''}`} style={{ borderColor: COLORS.border, ...(featured ? { borderTopColor: COLORS.bronzeAccent } : {}) }}>
+const WebPlanCard = ({ title, price, priceCaption, tagline, lead, items, note, cta, ctaSubject, featured = false }) => (
+  <div className={`web-plan-card relative bg-white border shadow-sm flex flex-col h-full ${featured ? 'border-t-4' : ''}`} style={{ borderColor: featured ? COLORS.bronzeAccent : COLORS.border, ...(featured ? { borderTopColor: COLORS.bronzeAccent } : {}) }}>
+    {featured && (
+      <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 text-white text-[9px] font-bold uppercase tracking-[0.3em] px-4 py-1.5 whitespace-nowrap" style={{ backgroundColor: COLORS.bronzeAccent }}>
+        Most Popular
+      </span>
+    )}
     <div className="p-8 pb-6 border-b" style={{ borderColor: COLORS.border }}>
-      <h3 className="text-sm font-bold uppercase tracking-[0.3em] mb-3" style={{ color: COLORS.bronzeOnLight }}>{title}</h3>
-      <p className="text-3xl font-bold tracking-tight mb-2" style={{ color: COLORS.cedarGreen }}>{price}</p>
+      <h3 className="text-sm font-bold uppercase tracking-[0.3em] mb-4" style={{ color: COLORS.bronzeOnLight }}>{title}</h3>
+      <p className="text-4xl font-bold tracking-tight" style={{ color: COLORS.cedarGreen }}>{price}</p>
+      <p className="text-[11px] font-light uppercase tracking-[0.2em] mt-1 mb-4 text-gray-400">{priceCaption}</p>
       <p className="text-[15px] font-bold" style={{ color: COLORS.cedarGreen }}>{tagline}</p>
       <p className="mt-3 text-sm font-light leading-relaxed" style={{ color: COLORS.slateGray }}>{lead}</p>
     </div>
@@ -2059,10 +2082,22 @@ const WebPlanCard = ({ title, price, tagline, lead, items, note, cta, ctaSubject
       <a
         href={webMailto(ctaSubject)}
         className="block text-center text-white px-6 py-4 text-[10px] font-bold uppercase tracking-[0.3em] transition-all hover:bg-black"
-        style={{ backgroundColor: COLORS.cedarGreen }}
+        style={{ backgroundColor: featured ? COLORS.bronzeAccent : COLORS.cedarGreen }}
       >
         {cta}
       </a>
+    </div>
+  </div>
+);
+
+const WebExtraItem = ({ icon, title, children }) => (
+  <div className="flex items-start space-x-4 text-left">
+    <div className="shrink-0 w-9 h-9 flex items-center justify-center mt-0.5" style={{ backgroundColor: COLORS.stoneBg, color: COLORS.bronzeOnLight }} aria-hidden="true">
+      {icon}
+    </div>
+    <div>
+      <h4 className="text-[14px] font-bold mb-1.5 tracking-tight" style={{ color: COLORS.cedarGreen }}>{title}</h4>
+      <p className="text-sm font-light leading-relaxed" style={{ color: COLORS.slateGray }}>{children}</p>
     </div>
   </div>
 );
@@ -2077,26 +2112,31 @@ const WebFaq = ({ q, a }) => (
 const WebServicesPage = () => {
   const plansRef = React.useRef(null);
   return (
-    <div className="animate-in fade-in duration-700">
+    <div>
+      <WebStyles />
+
       {/* HERO */}
-      <section className="py-24 md:py-36 px-6 text-center">
+      <section
+        className="py-24 md:py-32 px-6 text-center"
+        style={{ backgroundImage: `radial-gradient(ellipse 70% 55% at 50% 0%, rgba(139, 115, 85, 0.09), transparent)` }}
+      >
         <div className="max-w-4xl mx-auto">
-          <p className="text-[10px] font-bold uppercase tracking-[0.4em] mb-4" style={{ color: COLORS.bronzeOnLight }}>Cedar Web Services</p>
-          <h1 className="text-4xl md:text-6xl font-bold leading-[1.1] mb-6 tracking-tighter" style={{ color: COLORS.cedarGreen }}>
+          <div className="web-rise"><WebEyebrow>Cedar Web Services</WebEyebrow></div>
+          <h1 className="web-rise text-4xl md:text-6xl font-bold leading-[1.1] mb-6 tracking-tighter" style={{ color: COLORS.cedarGreen, animationDelay: '0.08s' }}>
             Enterprise Digital Infrastructure. <br />
             <span className="font-extralight italic" style={{ color: COLORS.slateGray }}>
               Enterprise Discipline. Fixed Pricing.
             </span>
           </h1>
-          <p className="text-lg md:text-xl mb-10 leading-relaxed font-light max-w-3xl mx-auto" style={{ color: COLORS.slateGray }}>
+          <p className="web-rise text-base md:text-xl mb-10 leading-relaxed font-light max-w-3xl mx-auto" style={{ color: COLORS.slateGray, animationDelay: '0.16s' }}>
             Cedar Infrastructure Group builds and operates websites for small businesses, churches, and community
             organizations across the United States. The same firm trusted by Fortune 500 enterprises and U.S. defense
             programs brings that standard to your website: scoped, priced, and delivered without the agency runaround.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <div className="web-rise flex flex-col sm:flex-row justify-center gap-4" style={{ animationDelay: '0.24s' }}>
             <button
               onClick={() => plansRef.current?.scrollIntoView({ behavior: 'smooth' })}
-              className="text-white px-8 py-4 text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center group"
+              className="text-white px-8 py-4 text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center group hover:bg-black"
               style={{ backgroundColor: COLORS.cedarGreen }}
             >
               See Plans
@@ -2104,11 +2144,22 @@ const WebServicesPage = () => {
             </button>
             <a
               href={webMailto('Web Services Inquiry')}
-              className="border px-8 py-4 text-xs font-bold uppercase tracking-widest transition-all text-center"
+              className="border px-8 py-4 text-xs font-bold uppercase tracking-widest transition-all text-center hover:bg-white"
               style={{ borderColor: COLORS.cedarGreen, color: COLORS.cedarGreen }}
             >
               Get Started
             </a>
+          </div>
+          <p className="web-rise mt-5 text-xs font-light tracking-wide text-gray-500" style={{ animationDelay: '0.3s' }}>
+            Builds from $3,500 · Care Plan $125/mo · No hourly billing on builds
+          </p>
+          <div className="web-rise mt-10 grid grid-cols-2 gap-x-4 gap-y-3 max-w-md mx-auto sm:max-w-none sm:flex sm:flex-wrap sm:justify-center sm:gap-x-8" style={{ animationDelay: '0.38s' }}>
+            {['Fixed Pricing', 'Live In About Two Weeks', 'U.S. Based Delivery', 'Enterprise Security Standards'].map(chip => (
+              <span key={chip} className="flex items-start sm:items-center gap-2 text-[10px] font-bold uppercase tracking-[0.25em] text-left" style={{ color: COLORS.cedarGreen }}>
+                <CheckCircle2 size={13} className="shrink-0 mt-0.5 sm:mt-0" style={{ color: COLORS.bronzeAccent }} aria-hidden="true" />
+                {chip}
+              </span>
+            ))}
           </div>
         </div>
       </section>
@@ -2138,13 +2189,15 @@ const WebServicesPage = () => {
       {/* PLANS */}
       <section ref={plansRef} className="py-16 md:py-24 px-6" style={{ backgroundColor: COLORS.neutralBg }}>
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>Choose Your Build.</h2>
+          <div className="text-center mb-14">
+            <WebEyebrow>Fixed-Price Plans</WebEyebrow>
+            <h2 className="text-2xl md:text-4xl font-bold tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>Choose Your Build.</h2>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-5 items-stretch pt-4">
             <WebPlanCard
               title="Landing Page"
               price="$3,500"
+              priceCaption="One-time build fee"
               tagline="One page. Everything that matters. Live fast."
               lead="The right choice for community groups, events, single-service businesses, and anyone who needs a professional presence without the sprawl."
               items={[
@@ -2163,7 +2216,8 @@ const WebServicesPage = () => {
             <WebPlanCard
               featured
               title="Multi-Page Site"
-              price="$6,500 to $9,500"
+              price="$6,500+"
+              priceCaption="One-time build fee, $6,500 to $9,500"
               tagline="Up to six pages. Editable by you."
               lead="For businesses and organizations that need room to grow: services pages, team bios, news, and a content management system so your staff can make updates without calling a developer."
               items={[
@@ -2181,7 +2235,8 @@ const WebServicesPage = () => {
             />
             <WebPlanCard
               title="Custom & Web Applications"
-              price="Scoped Per Project"
+              price="Scoped"
+              priceCaption="Quoted per project, in writing"
               tagline="When off-the-shelf isn't the job."
               lead="Member portals, e-commerce, multi-location platforms, third-party integrations, and anything with logic behind it. Scoped and quoted as a formal project under Cedar's standard engagement process."
               items={[
@@ -2238,8 +2293,50 @@ const WebServicesPage = () => {
         </div>
       </section>
 
+      {/* WHAT'S EXTRA, IN PLAIN ENGLISH */}
+      <section className="bg-white py-16 md:py-24 px-6 border-b border-gray-100">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <WebEyebrow>No Surprises</WebEyebrow>
+            <h2 className="text-2xl md:text-4xl font-bold tracking-tight uppercase mb-4" style={{ color: COLORS.cedarGreen }}>
+              What's Extra, In Plain English.
+            </h2>
+            <p className="text-base font-light leading-relaxed max-w-3xl mx-auto" style={{ color: COLORS.slateGray }}>
+              Your build fee covers the design, the build, and the launch. A few things are billed separately
+              because their cost depends on choices you make. Here is exactly what those are, so nothing on
+              your invoice is ever a surprise.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-10">
+            <WebExtraItem icon={<Globe size={18} />} title="Your domain name (your web address)">
+              Registering a name like yourpractice.com is a small yearly fee paid to a registrar, most standard
+              names cost less than $60 per year. If someone else already owns the exact name you want, it may not
+              be available at any price, or the owner may ask a premium for it. We check availability before you
+              commit and help you land a strong alternative if your first choice is taken. Once registered, your
+              Care Plan handles renewals so it never lapses.
+            </WebExtraItem>
+            <WebExtraItem icon={<Mail size={18} />} title="Professional email at your domain">
+              Email addresses like frontdesk@yourpractice.com are a separate service from the website, run on
+              Microsoft 365 or Google Workspace, with a monthly fee per mailbox billed by that provider. It is
+              worth it: patients and customers trust an email that matches your website far more than a Gmail or
+              Yahoo address. We set it up and connect it to your domain as an add-on service, quoted up front.
+            </WebExtraItem>
+            <WebExtraItem icon={<FileText size={18} />} title="Your words, photos, and logo">
+              You know your business; you supply the text, photos, and logo, and we make them shine. If you need
+              professional copywriting, logo design, or photography, we can scope that separately or work with a
+              provider you choose.
+            </WebExtraItem>
+            <WebExtraItem icon={<CreditCard size={18} />} title="Third-party services with their own fees">
+              Online booking, payment processing, appointment reminders, and review platforms are services you
+              subscribe to directly, each with its own pricing. We integrate them into your site; the
+              subscriptions themselves stay in your name and your control.
+            </WebExtraItem>
+          </div>
+        </div>
+      </section>
+
       {/* DOMAIN POLICY */}
-      <section className="bg-white py-16 md:py-20 px-6 border-b border-gray-100">
+      <section className="py-16 md:py-20 px-6" style={{ backgroundColor: COLORS.stoneBg }}>
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold mb-5 tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>
             Your Domain Is Yours. Full Stop.
@@ -2264,7 +2361,8 @@ const WebServicesPage = () => {
       <section className="py-16 md:py-24 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>Four Steps to Live.</h2>
+            <WebEyebrow>The Process</WebEyebrow>
+            <h2 className="text-2xl md:text-4xl font-bold tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>Four Steps to Live.</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <HowStep n="01" title="Pick Your Plan" desc="Fixed price, fixed scope. You already know the number." />
@@ -2295,9 +2393,15 @@ const WebServicesPage = () => {
       {/* FAQ */}
       <section className="py-16 md:py-24 px-6">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl md:text-3xl font-bold mb-10 tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>Questions, Answered.</h2>
+          <div className="text-center mb-10">
+            <WebEyebrow>FAQ</WebEyebrow>
+            <h2 className="text-2xl md:text-4xl font-bold tracking-tight uppercase" style={{ color: COLORS.cedarGreen }}>Questions, Answered.</h2>
+          </div>
           <div className="space-y-6">
+            <WebFaq q="Is the build price really everything I'll pay?" a="The build fee covers design, build, and launch in full. Ongoing, you'll have the $125/mo Care Plan, your domain's small yearly registration fee, and optional add-ons like professional email if you want them. Every one of those is listed above and quoted before you commit. There are no other charges." />
             <WebFaq q="Why is there no hourly rate on builds?" a="Because you shouldn't pay for our meetings. Fixed scope means the price is the price, and efficiency is our problem, not your bill." />
+            <WebFaq q="Can you set up professional email addresses for my business?" a="Yes. Addresses at your own domain, like office@yourpractice.com, run on Microsoft 365 or Google Workspace with a per-mailbox monthly fee from that provider. We handle the setup and connection as an add-on, quoted up front." />
+            <WebFaq q="What if the domain name I want is taken?" a="Domain names are first-come, first-served worldwide, so if someone owns your exact name we cannot force a sale. We check availability before you commit and help you choose a strong alternative, and we never start a build until you're happy with the name." />
             <WebFaq q="Can I edit the site myself?" a="Multi-Page Sites include a CMS for self-service edits. Landing Pages are maintained by us. That's what your 2 monthly Care Plan updates are for." />
             <WebFaq q="What if I need more than 6 pages?" a="That's a Custom engagement. We'll scope it in writing before anything starts." />
             <WebFaq q="Do you do e-commerce?" a="Yes, under Custom & Web Applications." />
@@ -2310,9 +2414,10 @@ const WebServicesPage = () => {
       {/* CLOSING CTA */}
       <section className="py-16 md:py-24 px-6 text-white text-center" style={{ backgroundColor: COLORS.cedarGreen }}>
         <div className="max-w-3xl mx-auto">
+          <WebEyebrow light>One Email Starts It</WebEyebrow>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-5">Ready When You Are.</h2>
           <p className="text-base font-light leading-relaxed text-gray-300 mb-8">
-            One email starts it. Tell us which plan fits and what you're building.
+            Tell us which plan fits and what you're building.
             We'll reply with the content checklist and a start date.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
